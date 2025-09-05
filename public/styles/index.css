@@ -1,0 +1,153 @@
+/*==========================
+default table
+===========================*/
+
+.table-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.table-outer {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+
+tbody tr:nth-child(odd) {
+  background-color: white;
+}
+tbody tr:nth-child(even) {
+  background-color: #f3fcff;
+}
+
+.default-table {
+  position: relative;
+  background: #ffffff;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  overflow: visible;
+  max-width: 700px;
+  min-width: 350px;
+}
+
+
+
+.default-table thead th {
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  white-space: nowrap;
+  color: #ffffff;
+  font-size: 18px;
+  text-align: left;
+}
+
+.default-table tbody tr td{
+  height: 40px !important;
+  padding: 4px 8px;
+}
+
+
+
+
+
+
+
+.table_div_custom {
+  width: 100%;
+  border: 1px solid #ede9e9;
+  border-radius: 2px;
+  overflow-x :auto; /* Use 'auto' to allow scrolling only when necessary */
+  overflow-y: auto;
+}
+
+
+
+
+
+.w-5{
+  width: 50px;
+  text-align: left;
+}
+.w-10{
+   width: 100px;
+}
+.w-15{
+  width: 150px;
+}
+
+.w-20 {
+  width: 200px;
+}
+
+.w-25{
+  width: 250px;
+}
+
+.w-30 {
+  width: 300px;
+}
+
+
+.table-inner-thead th {
+  position: relative !important;
+    padding: 3px 5px !important;
+    font-size: 16px !important;
+    color: white !important;
+    font-weight: 500;
+    background-color: #ebbe36 !important;
+    
+}
+
+
+
+.table_div {
+  width: 100%;
+  min-height: 350px;
+  max-height: 700px;
+  border: 1px solid #ede9e9;
+  border-radius: 2px;
+  overflow-x: auto; /* Horizontal scrolling */
+  overflow-y: auto; /* Vertical scrolling */
+}
+
+.default-table {
+  width: 100%;
+  max-width: 100%;
+  min-width: 700px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  background: #ffffff;
+  table-layout: fixed;
+}
+
+.default-table thead {
+  background: #525e72;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1; /* Ensure it stays above the body rows */
+}
+
+.default-table thead th {
+  padding: 10px 5px;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.default-table tbody tr:nth-child(odd) {
+  background-color: white;
+}
+
+.default-table tbody tr:nth-child(even) {
+  background-color: #f3fcff;
+}
+
+
+.default-table tbody tr {
+  border-top: 1px solid #ecedf2;
+}
+
+
