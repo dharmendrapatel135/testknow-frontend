@@ -9,7 +9,7 @@ const Landing = ()=>{
         <div className="text-gray-700 w-full h-[100vh] p-5">
             <div className="flex justify-between align-items-center">
              <div>
-                <h1 className="text-xl font-bold">Test Know</h1>
+                <h1 className="text-xl font-bold text-green-500">Test Know</h1>
              </div>
              <LoginRegModal open={open} setOpen={setOpen} type={type} />
              <div className="flex gap-2">
