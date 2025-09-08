@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { postReq } from "../../utils/apiHandlers";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { userDetails } from "../../features/user/userSlice";
+import { userDetails } from "../../../features/user/userSlice";
+import { postReq } from "../../../utils/apiHandlers";
 
 
 const initialState = {
     email:'',
     password:''
 }
-const LoginSection = () => {
+const LoginSection = ({setOpen}) => {
     const [form, setForm] = useState(initialState)
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -33,6 +33,7 @@ const LoginSection = () => {
                 dispatch(userDetails(response.data));
                 // navigate('/dashboard')
                 window.location.href = '/dashboard'
+                setOpen(false);
 
             }else if(!response.status){
                

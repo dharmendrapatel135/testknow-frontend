@@ -1,4 +1,4 @@
-import LoginSection from "./LoginSection";
+// import LoginSection from "./LoginSection";
 
 const Login = () => {
     return(
@@ -7,7 +7,7 @@ const Login = () => {
                Left side section
             </div>
             <div className="grid place-content-center h-screen">
-              <LoginSection />
+              {/* <LoginSection /> */}
             </div>
         </div>
     )

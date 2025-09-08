@@ -7,7 +7,7 @@ const menuList = [
   { name: "DASHBOARD", url: "/dashboard", id: "" },
   { name: "CATEGORY LIST", url: "/category-list", id: "" },
   { name: "TESTS", url: "/candidate-test-list", id: "" },
-  { name: "Question Library", url: "/question-library", id: "" },
+  { name: "QUESTION LIBRARY", url: "/question-library", id: "" },
   // { name: "JOB POSTING", url: "/employers-dashboard/job-posts", id: "" },
   // { name: "APPLICANTS", url: "/employers-dashboard/all-applicants", id: "" },
   // { name: "MY ASSIGN JOBS", url: "/employers-dashboard/my-assign-jobs" },
@@ -86,7 +86,7 @@ function MenuList({ active }) {
     if(userDetails?.role === 'admin' && (item.name == "TESTS")){
      return false
     }else if(userDetails?.role === 'aspirant' && (item.name == "CATEGORY LIST" || item.name == "QUESTION LIBRARY")){
-      return true;
+      return false;
     }else {
       return true;
     }

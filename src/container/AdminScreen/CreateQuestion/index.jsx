@@ -94,6 +94,7 @@ const CreateQuestion = () => {
               value={form.subject_ref}
               className="border p-1 cursor-pointer rounded-sm"
             > 
+              <option value={''}>Select</option>
               {subjectList.map((item) => {
                 return (
                   <option key={item.id} value={item.id}>

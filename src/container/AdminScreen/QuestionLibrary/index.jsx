@@ -88,6 +88,7 @@ const QuestionLibrary = () => {
         <div className="flex gap-3 place-items-center">
           <h2 className="py-2  text-lg font-semibold">Questions List</h2>
           <select onChange={(e) => setSelectSub(e.target.value)}>
+            <option value={''}>select Subject</option>
             {subjectList.map((item) => {
               return <option key={item.id} value={item.id}>{item.name}</option>;
             })}

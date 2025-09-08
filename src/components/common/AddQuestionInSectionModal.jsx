@@ -98,6 +98,7 @@ const AddQuestionInSectionModal = ({ open, setOpen, handleReload, questionId }) 
                 onChange={(e) => setPaperId(e.target.value)}
                 className="border rounded-xs w-full"
               >
+                <option value=''>Select</option>
                 {paperList.map((item) => {
                     return(
                         <option key={item.id} value={item.id}>{item.paper_name}</option>
