@@ -185,7 +185,8 @@ const CandidateTestStart = () => {
       setTimeLeft(timer);
       setStartTime(timer);
     }else if(timeLeft == 1 && nextSectioncount == sectionList.length){
-      handleSubmitPaper();
+      handleSubmitPaper();  
+      //submit paper 
     }
   }, [timeLeft]);
 
