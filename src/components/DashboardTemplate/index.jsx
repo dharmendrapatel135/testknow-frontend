@@ -11,7 +11,7 @@ function DashboardTemplate({ active, children }) {
       </div>
       <div className="col-span-full md:col-span-9 xl:col-span-10 overflow-y-auto h-100vh">
         <div className="h-20">
-          <div className="flex text-black justify-between items-center py-2 px-5 bg-gray-200">
+          <div className="flex text-black justify-between items-center py-2 px-5" style={{background:"rgb(196 197 225)"}}>
             <div className="">
               <h1 className="text-24 lg:text-36 font-extrabold">{active}</h1>
             </div>

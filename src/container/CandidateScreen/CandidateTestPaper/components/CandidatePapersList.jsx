@@ -57,7 +57,7 @@ const CandidatePapersList = () => {
                     </div>
                     :
                     <div className="w-[200px] text-end">
-                    <Link to={`/test-instruction/${item.id}`} className="cursor-pointer" target="_blank"> 
+                    <Link to={`/test-instruction/${item.id}/?paper_name=${item.paper_name}`} className="cursor-pointer" target="_blank"> 
                     <button className="bg-green-600 text-white py-2 px-3 rounded-sm">Start</button>
                     </Link>
                     </div>

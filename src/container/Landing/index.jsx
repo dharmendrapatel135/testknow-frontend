@@ -6,8 +6,9 @@ const Landing = ()=>{
     const [open, setOpen] = useState(false);
     const [type, setType] = useState('Registration');
     return(
-        <div className="text-gray-700 w-full h-[100vh] p-5">
-            <div className="flex justify-between align-items-center">
+        <div className="text-gray-700 w-full h-[100vh]">
+            <div style={{background:"#616298"}} className="p-5" >
+            <div className="flex justify-between align-items-center" >
              <div>
                 <h1 className="text-xl font-bold text-green-500">Test Know</h1>
              </div>
@@ -27,6 +28,7 @@ const Landing = ()=>{
                 }>Register</button>
                 {/* </Link> */}
              </div>
+            </div>
             </div>
             <div className="flex justify-center align-item-center  mt-5 h-[100%]">
                <h1 className="font-bold text-3xl">Landing Page Comming soon....</h1>

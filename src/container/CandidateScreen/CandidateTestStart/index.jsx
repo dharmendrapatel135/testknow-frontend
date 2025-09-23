@@ -26,6 +26,7 @@ const CandidateTestStart = () => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
+
   const handleGetAllQuestionsList = async () => {
     let update = [...sectionList];
     let section_Id = update[nextSectioncount]?.id;
@@ -172,20 +173,22 @@ const CandidateTestStart = () => {
     if (response.status) {
       toast.success("Test paper has been successfully submitted");
       window.location.href = "/dashboard";
+    }else if(!response.status){
+      // window.location.href = "/dashboard";
     }
   };
 
   useEffect(() => {
-    if(!timeLeft && nextSectioncount < sectionList.length){
-      console.log("---------working this ", nextSectioncount, sectionList.length);
+    if(timeLeft == 1 && nextSectioncount+1 == sectionList.length){
+      handleSubmitPaper();
+    }
+    else if(!timeLeft && nextSectioncount < sectionList.length){
       setNextSectioncount((prev) => prev+1);
       let update = [...sectionList]
       let time = update[nextSectioncount]?.duration;
       let timer = timeStringToSeconds(time);
       setTimeLeft(timer);
       setStartTime(timer);
-    }else if(timeLeft == 1 && nextSectioncount == sectionList.length){
-      handleSubmitPaper();
     }
   }, [timeLeft]);
 
