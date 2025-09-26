@@ -176,7 +176,11 @@ const CandidateTestStart = () => {
   };
 
   useEffect(() => {
-    if(!timeLeft && nextSectioncount < sectionList.length){
+    if(timeLeft == 1 && nextSectioncount+1 == sectionList.length){
+      handleSubmitPaper();  
+      //submit paper 
+    }
+    else if(!timeLeft && nextSectioncount < sectionList.length){
       console.log("---------working this ", nextSectioncount, sectionList.length);
       setNextSectioncount((prev) => prev+1);
       let update = [...sectionList]
@@ -184,9 +188,6 @@ const CandidateTestStart = () => {
       let timer = timeStringToSeconds(time);
       setTimeLeft(timer);
       setStartTime(timer);
-    }else if(timeLeft == 1 && nextSectioncount == sectionList.length){
-      handleSubmitPaper();  
-      //submit paper 
     }
   }, [timeLeft]);
 
