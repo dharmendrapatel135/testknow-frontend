@@ -35,8 +35,9 @@ const CandidateTestsList = () => {
                <div className="flex gap-2 my-2 ">
                 {item.test_list.map((_item) => {
                   return(
-                    <div key={_item.id} className="shadow p-5 bg-blue-200 rounded-sm ">
+                    <div key={_item.id} className="shadow p-2 bg-white rounded-sm ">
                         <Link to={`/candidate-test-list/test-paper/${_item.id}`}>
+                        <img src={_item.image} style={{width:"60px", height:"40px"}} />
                            <span className="bold">{_item.test}</span>
                         </Link>
                     </div>

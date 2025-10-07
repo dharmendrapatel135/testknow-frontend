@@ -8,6 +8,7 @@ import { postApiReq } from "../../../../utils/apiHandlers";
 const initialState = {
    category: "",
     type: "",
+    image:'',
 }
 
 const CreateCategoryModal = ({ open, setOpen, handleReload }) => {
@@ -20,9 +21,15 @@ const CreateCategoryModal = ({ open, setOpen, handleReload }) => {
   };
 
   const handleCreateCategory = async () => {
+    const formData = new FormData();
+    formData.append('type', form.type);
+    formData.append('category', form.category);
+    formData.append('image', form.image);
+
+    
     try {
       setIsLoading(!isLoading);
-      const response = await postApiReq(`/category/`, form);
+      const response = await postApiReq(`/category/`, formData);
       setIsLoading(!isLoading)
       if (response.status) {
         toast.success("Category has been successfully created!");
@@ -35,6 +42,7 @@ const CreateCategoryModal = ({ open, setOpen, handleReload }) => {
         setIsLoading(false);
     }
   };
+
 
   return (
     <Dialog
@@ -78,6 +86,16 @@ const CreateCategoryModal = ({ open, setOpen, handleReload }) => {
                 className="input"
                 onChange={handleChange}
                 value={form.type}
+              />
+            </div>
+            <div>
+              <p>Categrory Icon</p>
+              <input
+                type="file"
+                className="input"
+                onChange={(e) => {
+                  setForm((prev) => ({...prev, image:e.target.files[0]}))
+                }}
               />
             </div>
             <div className="mt-3 flex justify-end">

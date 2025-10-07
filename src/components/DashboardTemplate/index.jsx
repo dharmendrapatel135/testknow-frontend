@@ -1,9 +1,36 @@
 import { useState } from "react";
 import SideBar from "../Sidebar";
+import { toast } from "react-toastify";
+import { postReq } from "../../utils/apiHandlers";
+import { useSelector } from "react-redux";
+// import { reactIcons } from "../../utils/icons";
 
 function DashboardTemplate({ active, children }) {
   const [open, setOpen] = useState(false);
   const [openOpt, setOpenOpt] = useState(false);
+  const token = useSelector((state) => state.user.userInfo);
+
+    const handleLogout = async() => {
+         let data = {
+          refresh:token.refresh
+    }
+          try{
+              const response = await postReq(`/logout/`, data);
+              if(response.status){
+                  Cookies.remove("is_user_token");
+                  Cookies.remove("is_user_refresh"); // expires in 1 day
+                  // navigate('/dashboard')
+                  window.location.href = '/'  
+              }else if(!response.status){
+                 toast.error(response.error.message);
+              }
+          }catch(err){
+          }
+         
+      }
+  
+
+
   return (
     <div className="grid grid-cols-12">
       <div className="hidden md:block md:col-span-3  xl:col-span-2">
@@ -34,6 +61,7 @@ function DashboardTemplate({ active, children }) {
                   <span className="text-16 text-lightgray">
                     xyz@gmail.com
                   </span>
+                  <span onClick={() => setOpenOpt(!openOpt)}>log</span>
                 </div>
                 {/* <div className="px-2">
                   <img
@@ -43,8 +71,8 @@ function DashboardTemplate({ active, children }) {
                   />
                 </div> */}
                 {openOpt && (
-                  <div className="bg-white w-64 h-32 rounded-md top-20 z-30 border-[1px] text-black absolute">
-                    <div className="p-5">
+                  <div className="bg-white w-40 h-15 rounded-md top-20 z-30 border-[1px] text-black absolute">
+                    <div className="p-5" onClick={handleLogout}>
                       <p>Logout</p>
                     </div>
                   </div>

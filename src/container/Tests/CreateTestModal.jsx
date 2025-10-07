@@ -4,11 +4,10 @@ import { toast } from "react-toastify";
 import Button from "../../components/FormElements/Button";
 import { postApiReq } from "../../utils/apiHandlers";
 
-
 const initialState = {
-   title: "",
-   category: "",
-}
+  title: "",
+  category: "",
+};
 
 const CreateTestModal = ({ open, setOpen, handleReload }) => {
   const [form, setForm] = useState(initialState);
@@ -23,16 +22,16 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
     try {
       setIsLoading(!isLoading);
       const response = await postApiReq(`/test/`, form);
-      setIsLoading(!isLoading)
+      setIsLoading(!isLoading);
       if (response.status) {
-        toast.success("Category has been successfully created!");
+        toast.success("Test has been successfully created!");
         setOpen(false);
         handleReload();
-        setForm(initialState)
+        setForm(initialState);
       } else if (!response.status) {
       }
     } catch (err) {
-        setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -45,7 +44,7 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
       <div className="bg-white w-[400px] md:w-[450px] rounded-[20px] ">
         {/* <DialogTitle id="responsive-dialog-title"> */}
         <div className="flex justify-between items-center bg-black h-8 rounded-t-sm  px-3">
-          <span className="flex-1 text-center text-white">Create Category</span>
+          <span className="flex-1 text-center text-white"></span>
           <div className="w-5 h-5 bg-white flex items-center justify-center rounded-sm">
             <span
               className="text-black cursor-pointer"
@@ -71,7 +70,7 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
               />
             </div>
             <div>
-              <p>Category</p>
+              <p>Category </p>
               <input
                 type="text"
                 name="category"
@@ -80,8 +79,14 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
                 value={form.category}
               />
             </div>
+
             <div className="mt-3 flex justify-end">
-              <Button name="Create" className={'create-btn'} handleClick={handleCreateTest} isLoading={isLoading} />
+              <Button
+                name="Create"
+                className={"create-btn"}
+                handleClick={handleCreateTest}
+                isLoading={isLoading}
+              />
             </div>
           </div>
         </DialogContent>

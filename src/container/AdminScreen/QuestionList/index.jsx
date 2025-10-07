@@ -56,7 +56,15 @@ const QuestionList = () => {
                   <h2 className="text-lg font-bold">
                     {index + 1} {item.question.question_text}
                   </h2>
+                   <h2 className="text-lg font-bold">
+                    {index + 1} {item.question.question_text_hindi}
+                  </h2>
                 </div>
+                {item.question.image &&
+                <div>
+                  <img src={item.question.image} />
+                </div>
+                }
                 <div className="row-start-2">
                   {item.question.options.map((_item, index) => {
                     return (

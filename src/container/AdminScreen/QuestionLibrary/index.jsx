@@ -108,14 +108,23 @@ const QuestionLibrary = () => {
       </div>
       <div className="mt-3">
         {questionsData.map((item, index) => {
+          console.log("----------item ", item)
           return (
             <Paper key={item.id}>
               <div>
-                <div>
+                <div className="mb-2">
                   <h2 className="text-lg font-bold">
                     {index + 1} {item.question_text}
                   </h2>
+                    <h2 className="text-lg font-bold">
+                     {item.question_text_hindi}
+                  </h2>
                 </div>
+                 {item.image &&
+                <div className="my-2">
+                  <img src={item.image} />
+                </div>
+                }
                 <div className="row-start-2">
                   {item.options.map((_item, index) => {
                     return (
@@ -125,7 +134,7 @@ const QuestionLibrary = () => {
                             _item.is_corret ? "text-green-800" : ""
                           }`}
                         >
-                          {index + 1}. {_item.text}
+                          {index + 1}. {_item.text}/ {_item.text_hindi}
                         </span>
                       </div>
                     );
@@ -139,11 +148,11 @@ const QuestionLibrary = () => {
                        }}>Add</button>
                     <button
                       className="update-btn"
-                      onClick={() => handleDeleteQuestion(item.id)}
+                      
                     >
                       Update
                     </button>
-                    <button className="delete-btn">Delete</button>
+                    <button className="delete-btn" onClick={() => handleDeleteQuestion(item.id)} >Delete</button>
                   </div>
                 </div>
               </div>
