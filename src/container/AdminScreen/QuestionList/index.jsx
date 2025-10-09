@@ -53,9 +53,19 @@ const QuestionList = () => {
             <Paper key={item.id}>
               <div>
                 <div>
+                  {item.question.que_description &&
+                  <div className="my-2">
+                    {item.question.que_description}
+                  </div>
+                  }
                   <h2 className="text-lg font-bold">
                     {index + 1} {item.question.question_text}
                   </h2>
+                   {item.question.que_description_hindi &&
+                  <div className="my-3">
+                    {item.question.que_description_hindi}
+                  </div>
+                  }
                    <h2 className="text-lg font-bold">
                     {index + 1} {item.question.question_text_hindi}
                   </h2>

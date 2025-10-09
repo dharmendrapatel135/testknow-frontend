@@ -14,6 +14,7 @@ const QuestionLibrary = () => {
   const [selectTopic, setSelectTopic] = useState('');
   const [open, setOpen] = useState(false);
   const [questionId, setQuestionId] = useState('');
+  const [allParam, setAllParam] = useState('');
 
 
   const handleGetQuestionList = async (param) => {
@@ -48,6 +49,7 @@ const QuestionLibrary = () => {
       param += param ? `&topic=${selectTopic}` :  `?topic=${selectTopic}`
         handleGetQuestionList(param);
     }
+    setAllParam(param);
   }, [selectSub, selectTopic])
 
   useEffect(() => {
@@ -59,6 +61,7 @@ const QuestionLibrary = () => {
     try {
       const response = await deleteReq(`/questions/${id}/`);
       if (response.status) {
+          handleGetQuestionList();
       }
     } catch (err) {}
   };
@@ -77,7 +80,7 @@ const QuestionLibrary = () => {
     
       useEffect(() => {
         if(selectSub){
-          handleGetTopicList();
+          handleGetTopicList(allParam);
         }
       }, [selectSub])
 
@@ -86,7 +89,7 @@ const QuestionLibrary = () => {
       <AddQuestionInSectionModal open={open} setOpen={setOpen} questionId={questionId} />
       <div className="flex justify-between my-1 bg-gray-200 px-2">
         <div className="flex gap-3 place-items-center">
-          <h2 className="py-2  text-lg font-semibold">Questions List</h2>
+          <h2 className="py-2  text-lg font-semibold">Questions Library</h2>
           <select onChange={(e) => setSelectSub(e.target.value)}>
             <option value={''}>select Subject</option>
             {subjectList.map((item) => {
@@ -113,9 +116,19 @@ const QuestionLibrary = () => {
             <Paper key={item.id}>
               <div>
                 <div className="mb-2">
+                  {item.que_description &&
+                  <div className="my-2">
+                    {item.que_description}
+                  </div>
+                  }
                   <h2 className="text-lg font-bold">
                     {index + 1} {item.question_text}
                   </h2>
+                  {item.que_description_hindi &&
+                    <div className="my-2">
+                      {item.que_description_hindi}
+                    </div>
+                  }
                     <h2 className="text-lg font-bold">
                      {item.question_text_hindi}
                   </h2>
@@ -152,7 +165,7 @@ const QuestionLibrary = () => {
                     >
                       Update
                     </button>
-                    <button className="delete-btn" onClick={() => handleDeleteQuestion(item.id)} >Delete</button>
+                    <button className="delete-btn" onClick={() => handleDeleteQuestion(item.id)}   >Delete</button>
                   </div>
                 </div>
               </div>

@@ -7,6 +7,7 @@ import CreateCategoryModal from "./components/CreateCategoryModal";
 import moment from "moment";
 import DeleteItemModal from "@components/common/DeleteItemModal";
 import { toast } from "react-toastify";
+import { reactIcons } from "../../../utils/icons";
 
 const CategoryList = () => {
   const [categoryListData, setCategoryListData] = useState([]);
@@ -82,11 +83,11 @@ const CategoryList = () => {
                       <td style={{width:"300px"}} className="text-capitalize truncate ">{moment(item.created_at).format("DD-MM-YYYY, hh:mm A")}</td>
                       <td style={{width:"300px"}}>
                         <div className="flex gap-2">
-                          <span className="update-btn" >Update</span>
-                          <button className="delete-btn" onClick={() => {
+                          <span className="text-green-500">{reactIcons.edit}</span>
+                          <span className="text-red-500" onClick={() => {
                             setOpenDelModal(true)
                             setItemId(item.id);
-                            }}>Delete</button>
+                            }}>{reactIcons.delete}</span>
                         </div>
                       </td>
                     </tr>

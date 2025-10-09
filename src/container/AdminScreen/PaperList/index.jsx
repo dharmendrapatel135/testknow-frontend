@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { getReq } from "../../../utils/apiHandlers";
+import { deleteReq, getReq } from "../../../utils/apiHandlers";
 import { Link, useParams } from "react-router-dom";
 import Paper from "../../../components/common/Paper";
 import DashboardTemplate from "@components/DashboardTemplate";
 import CreatePaperModal from "./components/CreatePaperModal";
+import moment from 'moment'
+import { reactIcons } from "../../../utils/icons";
 
 const PaperList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +34,17 @@ const PaperList = () => {
       handleGetPaperList();
     }
   }, [testId]);
+
+  const handleDeletePaper = async(id) => {
+    const response = await deleteReq(`/paper/${id}`);
+    if(response.status){
+
+    }else{
+
+    }
+  }
+
+
   return (
     <DashboardTemplate>
       <CreatePaperModal open={open} setOpen={setOpen} handleReload={handleGetPaperList} />
@@ -68,8 +81,13 @@ const PaperList = () => {
                         <td style={{width:"100px"}}>{item.max_score}</td>
                         <td style={{width:"150px"}}>{item.duration}</td>
                         <td style={{ width: "200px" }}>{item.created_by}</td>
-                        <td style={{width:"200px"}}>{item.created_at}</td>
-                        <td style={{width:"200px"}}>Action</td>
+                        <td style={{width:"200px"}}>{moment(item.created_at).format('DD-MM-YYYY hh:mm A')}</td>
+                        <td style={{width:"200px"}}>
+                          <div className="flex gap-2">
+                            <span className="text-green-500 font-[20px]">{reactIcons.edit}</span>
+                            <span className="text-red-500 font-[20px]" onClick={() => handleDeletePaper(item.id)}>{reactIcons.delete}</span>
+                          </div>
+                        </td>
                       </tr>
                     </>
                   );

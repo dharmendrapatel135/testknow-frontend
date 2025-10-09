@@ -185,6 +185,24 @@ form.options.forEach((opt, index) => {
               </button>
             </div>
           </div>
+           <div>
+            <h2 className="font-bold">Question Description</h2>
+            <textarea
+              className="w-full border p-2"
+              name="que_description"
+              value={form.que_description}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <h2 className="font-bold">Question Description Hindi</h2>
+            <textarea
+              className="w-full border p-2"
+              name="que_description_hindi"
+              value={form.que_description_hindi}
+              onChange={handleChange}
+            />
+          </div>
           <div>
             <h2 className="font-bold">Question Text</h2>
             <textarea
@@ -221,9 +239,11 @@ form.options.forEach((opt, index) => {
               {form.options.map((item, index) => {
                 return (
                   <div key={index} className="col-span-1">
+                    <div className="flex gap-2">
                     <div>
                       <textarea
                         className="border p-2"
+                        placeholder="wirte options in english"
                         value={item.text}
                         onChange={(e) => {
                           const newOptions = [...form.options];
@@ -237,6 +257,25 @@ form.options.forEach((opt, index) => {
                           }));
                         }}
                       />
+                    </div>  
+                     <div>
+                      <textarea
+                        className="border p-2"
+                        placeholder="write options in hindi"
+                        value={item.text_hindi}
+                        onChange={(e) => {
+                          const newOptions = [...form.options];
+                          newOptions[index] = {
+                            ...newOptions[index],
+                            text_hindi: e.target.value,
+                          };
+                          setForm((prev) => ({
+                            ...prev,
+                            options: newOptions,
+                          }));
+                        }}
+                      />
+                    </div>
                     </div>
                     <div className="flex gap-2">
                       <input
