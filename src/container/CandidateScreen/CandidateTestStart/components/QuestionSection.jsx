@@ -11,17 +11,37 @@ const QuestionSection = ({
   startTime,
   timeLeft,
 }) => {
+
+  console.log("-------------item ", item);
   return (
     <div className="flex w-full">
-      {item.que_description &&
+      <div>
+      {item.question.que_description &&
       <div className="w-[70%]">
-         {item.que_description}
+        <div className="my-2">
+         {item.question.que_description}
+        </div>
+        <div className="my-3">
+         {item.question.que_description_hindi}
+        </div>
       </div>
       }
-      <div className={`${item.que_description ? "w-[30%]" : "w-[100%]"}`}>
+       {item.question.image &&
+        <div>
+          <img src={item.question.image} />
+        </div>
+        }
+      </div>
+      <div className={`${item.que_description ? "w-[30%]" : "w-[100%]"} border border-gray-200 px-5`}>
       <div>
-      <div>
-        <h4 className="font-bold font-[20px] mb-2">Q. {count+1} {item.question.question_text}</h4></div>
+        <div>
+          <h4 className="font-bold font-[20px] mb-2">Q. {count+1} {item.question.question_text}</h4>
+        </div>
+        {item.question.question_text_hindi &&
+         <div>
+          <h4 className="font-bold font-[20px] mb-2">Q. {count+1} {item.question.question_text_hindi}</h4>
+        </div>
+        }
       <div>
         <QuestionOptionSection
           item={item}

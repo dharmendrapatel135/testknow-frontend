@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 const CandidateTestHeader = () => {
     const [param] = useSearchParams();
     const paperName = param.get("paper_name");
+    console.log("------------param ", param)
     return(
         <div className="h-[8vh] bg-blue-300 flex place-content-center justify-center">
            <div className="flex justify-content-center">

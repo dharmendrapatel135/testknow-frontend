@@ -8,6 +8,7 @@ import { getReq, postApiReq } from "../../../../utils/apiHandlers";
 const initialState = {
     title: "",
     category: "",
+    image:""
 }
 
 const CreateTestModal = ({ open, setOpen, handleReload }) => {
@@ -22,9 +23,13 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
   };
 
   const handleCreateTest = async () => {
+    const formData = new FormData();
+    formData.append('title', form.title);
+    formData.append('category', form.category);
+    formData.append('image', form.image);
     try {
       setIsLoading(!isLoading);
-      const response = await postApiReq(`/tests/`, form);
+      const response = await postApiReq(`/tests/`, formData);
       setIsLoading(!isLoading)
       if (response.status) {
         toast.success("Category has been successfully created!");
@@ -106,6 +111,16 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
                 })
                 }
               </select>
+            </div>
+            <div>
+              <p>Test Icon</p>
+              <input
+                type="file"
+                className="input"
+                onChange={(e) => {
+                  setForm((prev) => ({...prev, image:e.target.files[0]}))
+                }}
+              />
             </div>
             <div className="mt-3 flex justify-end">
               <Button name="Create" className={'create-btn'} handleClick={handleCreateTest} isLoading={isLoading} />

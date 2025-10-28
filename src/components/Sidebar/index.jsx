@@ -4,9 +4,10 @@ function SideBar({ active }) {
   return (
     <div className="h-screen" style={{background:"#616298"}}>
       <div className="px-10  md:py-10 flex justify-center">
-        <h1 className="text-bluewhalelight text-24 font-bold underline">
+        {/* <h1 className="text-bluewhalelight text-24 font-bold underline">
            <span className="text-green">patel </span>
-        </h1>
+        </h1> */}
+        <img src='/images/logo/testknow.png'  style={{width:"100px", height:"100px"}}/>
       </div>
       <MenuList active={active} />
       <div className="block md:hidden px-5">

@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userDetails } from "../../../features/user/userSlice";
 import { postReq } from "../../../utils/apiHandlers";
-import CircleLoader from "../../../components/common/Loader";
 import { toast } from "react-toastify";
+import CircleLoader from "../../../components/Loader/CircleLoader";
+
 
 
 const initialState = {
@@ -37,7 +38,6 @@ const LoginSection = ({setOpen}) => {
             setError((prev) => ({...prev, password:"This field is required"}));
             return;
         }
-
 
         try{
             setIsLoading(true);
@@ -74,8 +74,8 @@ const LoginSection = ({setOpen}) => {
            </div>
            <div className="pt-2 ">
             <button className="btn w-full  border rounded-sm px-2 flex gap-2" onClick={handleLogin}>
-            <div className="justify-center w-full py-1 flex ">
-                <span>Login</span> {isLoading && <CircleLoader size={10} />}
+            <div className="justify-center align-items-center gap-2  w-full py-1 flex ">
+                <span>Login</span> <span>{isLoading && <CircleLoader size={12} />}</span>
             </div>
             </button>
            </div>

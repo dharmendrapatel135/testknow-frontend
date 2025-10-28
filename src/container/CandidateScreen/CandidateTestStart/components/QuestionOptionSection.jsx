@@ -27,6 +27,7 @@ const QuestionOptionSection = ({ item, setQuestionAnswer, questionAnswer, startT
                 checked={((questionAnswer.candidate_answer || item.candidate_answer) == _item.text ? true : false)}
               />
               <span>{_item.text}</span>
+              <p>{_item.text_hindi}</p>
             </li>
           );
         })}

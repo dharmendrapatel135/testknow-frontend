@@ -3,7 +3,7 @@ import { postReq } from "../../../utils/apiHandlers";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import CircleLoader from "../../../components/common/Loader";
+import CircleLoader from "../../../components/Loader/CircleLoader";
 
 const initialState = {
   email: "",
@@ -109,9 +109,9 @@ const RegistrationSection = ({ setOpen }) => {
           className="btn border rounded-sm w-full px-2"
           onClick={handleRegister}
         >
-          <div className="justify-center w-full py-1 flex ">
-            <span>Register</span> {isLoading && <CircleLoader size={10} />}
-          </div>
+          <div className="justify-center align-items-center gap-2  w-full py-1 flex ">
+                <span>Register</span> <span>{isLoading && <CircleLoader size={12} />}</span>
+            </div>
         </button>
       </div>
     </div>
