@@ -25,6 +25,7 @@ import CandidateTests from '@CandidateScreen/CandidateExams';
 import CandidateTestPaper from '@CandidateScreen/CandidateTestPaper';
 import CandidateTestStart from '@CandidateScreen/CandidateTestStart';
 import CandidateTestInstruction from '@CandidateScreen/CandidateTestInstruction';
+import Package from './container/Package';
 
 
 
@@ -50,6 +51,7 @@ function App() {
           <Route path={'/candidate-test-list'} element={<CandidateTests />} />
           <Route path={'/candidate-test-list/test-paper/:testId'} element={<CandidateTestPaper />} /> 
           <Route path={'/test-instruction/:paperId'}  element={<CandidateTestInstruction />}   />
+          <Route path={'/package-details'}  element={<Package />}   />
           <Route path={'/test-instruction/start-test/:paperId/section'}  element={<CandidateTestStart />}   />
         </Routes>
       </Router>

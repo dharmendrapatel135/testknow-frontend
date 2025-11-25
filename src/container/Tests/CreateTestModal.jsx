@@ -60,7 +60,7 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
         <DialogContent>
           <div>
             <div>
-              <p>Test Name</p>
+              <p>Test NameS</p>
               <input
                 type="text"
                 name="title"

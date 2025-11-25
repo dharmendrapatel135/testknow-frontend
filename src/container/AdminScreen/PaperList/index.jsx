@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteReq, getReq } from "../../../utils/apiHandlers";
+import { deleteReq, getReq, postApiReq, postReq } from "../../../utils/apiHandlers";
 import { Link, useParams } from "react-router-dom";
 import Paper from "../../../components/common/Paper";
 import DashboardTemplate from "@components/DashboardTemplate";
@@ -43,7 +43,23 @@ const PaperList = () => {
 
     }
   }
+  
+  
+    const handleFileUpload = async(e) => {
+      const fileData = e.target.files[0];
+      const formData = new FormData();
+      formData.append("file", fileData);
 
+      try{
+        const response  = await postApiReq(`/paper/upload-papers/?test_ref=${testId}`, formData); 
+        if(response.status){
+  
+        }
+      }catch(err){
+
+      }
+    }
+  
 
   return (
     <DashboardTemplate>
@@ -53,6 +69,22 @@ const PaperList = () => {
          <div className="flex justify-between my-1">
             <h2 className="py-2  text-lg font-semibold">Test Papers</h2>
             <button className="create-btn" onClick={() => setOpen(!open)}>Create</button>
+             <div>
+              <label>
+                <div htmlFor="#upload">
+                  {/* <span className="theme-btn btn-style-one small">
+                    {isLoading ? <BtnBeatLoader /> : "Upload CSV File"}
+                  </span> */}Excel
+                </div>
+                <input
+                  type="file"
+                  id="upload"
+                  onChange={handleFileUpload}
+                  className="d-none"
+                  // disabled={isLoading}
+                />
+              </label>
+            </div>
         </div>
           <div className="table_div custom-scroll-sm">
             <table className="default-table ">

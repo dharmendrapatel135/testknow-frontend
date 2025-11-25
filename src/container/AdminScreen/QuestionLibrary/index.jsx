@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { deleteReq, getReq } from "../../../utils/apiHandlers";
+import { deleteReq, getReq, postApiReq } from "../../../utils/apiHandlers";
 import Paper from "../../../components/common/Paper";
 import DashboardTemplate from "../../../components/DashboardTemplate";
 import AddQuestionInSectionModal from "../../../components/common/AddQuestionInSectionModal";
@@ -84,6 +84,22 @@ const QuestionLibrary = () => {
         }
       }, [selectSub])
 
+    
+        const handleFileUpload = async(e) => {
+          const fileData = e.target.files[0];
+          const formData = new FormData();
+          formData.append("file", fileData);
+    
+          try{
+            const response  = await postApiReq(`/upload-questions/`, formData); 
+            if(response.status){
+      
+            }
+          }catch(err){
+    
+          }
+        }
+
   return (
     <DashboardTemplate>
       <AddQuestionInSectionModal open={open} setOpen={setOpen} questionId={questionId} />
@@ -108,10 +124,10 @@ const QuestionLibrary = () => {
           Create
           </Link>
           </button>
+          <input type="file" onChange={handleFileUpload} />
       </div>
       <div className="mt-3">
         {questionsData.map((item, index) => {
-          console.log("----------item ", item)
           return (
             <Paper key={item.id}>
               <div>
@@ -121,14 +137,14 @@ const QuestionLibrary = () => {
                     {item.que_description}
                   </div>
                   }
-                  <h2 className="text-lg font-bold">
-                    {index + 1} {item.question_text}
-                  </h2>
                   {item.que_description_hindi &&
                     <div className="my-2">
                       {item.que_description_hindi}
                     </div>
                   }
+                  <h2 className="text-lg font-bold">
+                    {index + 1} {item.question_text}
+                  </h2>
                     <h2 className="text-lg font-bold">
                      {item.question_text_hindi}
                   </h2>

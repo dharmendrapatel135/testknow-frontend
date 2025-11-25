@@ -6,19 +6,20 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
 const initialState = {
-  paper_name:'',
-  type:"",
-  total_question:"",
-  max_score:"",
-  duration:"",
-  test_ref:""
+  paper_name: "",
+  type: "",
+  total_question: "",
+  max_score: "",
+  duration: "",
+  test_ref: "",
+  paper_status:"Pending"
 };
 
 const CreatePaperModal = ({ open, setOpen, handleReload }) => {
   const [form, setForm] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [categoryList, setCategoryList] = useState([]);
-  const {testId} = useParams();
+  const { testId } = useParams();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +27,7 @@ const CreatePaperModal = ({ open, setOpen, handleReload }) => {
   };
 
   const handleCreatePaper = async () => {
-    form['test_ref'] = testId;
+    form["test_ref"] = testId;
     try {
       setIsLoading(!isLoading);
       const response = await postApiReq(`/paper/`, form);
@@ -43,8 +44,6 @@ const CreatePaperModal = ({ open, setOpen, handleReload }) => {
     }
   };
 
-
-  console.log("-------------category list ", categoryList);
 
   return (
     <Dialog
@@ -120,6 +119,20 @@ const CreatePaperModal = ({ open, setOpen, handleReload }) => {
                 onChange={handleChange}
                 value={form.duration}
               />
+            </div>
+            <div>
+              <p>Paper Status</p>
+              <select
+                type="text"
+                name="paper_status"
+                onChange={handleChange}
+                value={form.paper_status}
+                className="input"
+              >
+                <option value={"Pending"}>Pending</option>
+                <option value={"Inprogress"}>Inprogress</option>
+                <option value={"Complete"}>Complete</option>
+              </select>
             </div>
 
             <div className="mt-3 flex justify-end">

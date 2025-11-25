@@ -106,7 +106,7 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
                 <option value={""}>Select</option>
                 {categoryList.map((item) => {
                   return(
-                    <option key={item.id} value={item.category}>{item.category}</option>
+                    <option key={item.id} value={item.id}>{item.category}</option>
                   )
                 })
                 }

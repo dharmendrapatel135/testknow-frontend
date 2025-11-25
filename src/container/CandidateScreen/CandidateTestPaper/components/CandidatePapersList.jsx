@@ -56,9 +56,16 @@ const CandidatePapersList = () => {
                     {/* </Link> */}
                     </div>
                     :
+                    item.is_purchased ?
                     <div className="w-[200px] text-end">
                     <Link to={`/test-instruction/${item.id}/?paper_name=${item.paper_name}`} className="cursor-pointer" target="_blank"> 
                     <button className="bg-green-600 text-white py-2 px-3 rounded-sm">Start</button>
+                    </Link>
+                    </div>
+                    :
+                    <div className="w-[200px] text-end">
+                    <Link to={`/package-details`} className="cursor-pointer" target="_blank"> 
+                    <button className="bg-blue-500 text-white py-2 px-3 rounded-sm">Buy Now </button>
                     </Link>
                     </div>
                     }

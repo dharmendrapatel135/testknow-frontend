@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getReq } from "@utils/apiHandlers";
 import Paper from "@components/common/Paper";
 import CreateTestModal from "./components/CreateTestModal";
+import moment from 'moment';
 
 const TestList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,6 +17,7 @@ const TestList = () => {
     try {
       setIsLoading(true);
       const response = await getReq(`/tests/?category_ref=${categoryId}`);
+      console.log("------------test data ", response.data);
       if (response.status) {
         setTestData(response.data.results || response.data);
       } else if (!response.status) {
@@ -60,13 +62,13 @@ const TestList = () => {
                             {item.title}
                           </Link>
                         </td>
-                        <td style={{width:"300px"}}>{item.category}</td>
+                        <td style={{width:"300px"}}>{item.category_obj.category}</td>
                         <td style={{ width: "300px" }}>{item.created_by}</td>
                         <td
                           style={{ width: "300px" }}
                           className="text-capitalize truncate "
                         >
-                          {}
+                          {moment(item.created_at).format('DD-MM-YYYY hh:mm A')}
                         </td>
                       </tr>
                     </>

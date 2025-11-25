@@ -29,11 +29,12 @@ const CandidateTestsList = () => {
   return (
     <div>
       {testsData.map((item, index) => {
+        console.log("-------------item ", item.category.name);
         return(
             <div key={index} className="my-2">
-               <h4 className="">{item.category}</h4>
+               <h4 className="font-[40px] bold">{item.category.name}</h4>
                <div className="flex gap-2 my-2 ">
-                {item.test_list.map((_item) => {
+                {item.category.test_list.map((_item) => {
                   return(
                     <div key={_item.id} className="shadow p-2 bg-white rounded-sm ">
                         <Link to={`/candidate-test-list/test-paper/${_item.id}`}>
