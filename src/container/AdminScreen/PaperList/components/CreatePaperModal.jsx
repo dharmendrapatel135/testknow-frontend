@@ -4,6 +4,8 @@ import Button from "../../../../components/FormElements/Button";
 import { getReq, postApiReq } from "@utils/apiHandlers";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { patchReq } from "../../../../utils/apiHandlers";
+import { reactIcons } from "../../../../utils/icons";
 
 const initialState = {
   paper_name: "",
@@ -12,10 +14,10 @@ const initialState = {
   max_score: "",
   duration: "",
   test_ref: "",
-  paper_status:"Pending"
+  paper_status: "Pending",
 };
 
-const CreatePaperModal = ({ open, setOpen, handleReload }) => {
+const CreatePaperModal = ({ open, setOpen, handleReload, paper, setPaper }) => {
   const [form, setForm] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [categoryList, setCategoryList] = useState([]);
@@ -30,12 +32,13 @@ const CreatePaperModal = ({ open, setOpen, handleReload }) => {
     form["test_ref"] = testId;
     try {
       setIsLoading(!isLoading);
-      const response = await postApiReq(`/paper/`, form);
+      const response = await (paper ? patchReq(`/paper/${paper.id}/`) : postApiReq(`/paper/`, form));
       setIsLoading(!isLoading);
       if (response.status) {
-        toast.success("Category has been successfully created!");
+        toast.success(`Test Paper has been successfully ${paper ? 'updated' :'created!'}`);
         setOpen(false);
         handleReload();
+        setPaper(null);
         setForm(initialState);
       } else if (!response.status) {
       }
@@ -44,26 +47,40 @@ const CreatePaperModal = ({ open, setOpen, handleReload }) => {
     }
   };
 
+  useEffect(() => {
+    if (paper) {
+      setForm((prev) => ({
+        ...prev,
+        paper_name: paper.paper_name,
+        type: paper.type,
+        total_question: paper.total_question,
+        max_score: paper.max_score,
+        duration: paper.duration.split(":").reduce((acc, time) => 60 * acc + +time),
+        paper_status:paper.paper_status
+      }));
+    }
+  }, [paper]);
 
   return (
     <Dialog
       open={open}
-      // onClose={{}}
       aria-labelledby="responsive-dialog-title"
     >
       <div className="bg-white w-[400px] md:w-[450px] rounded-[20px] ">
         {/* <DialogTitle id="responsive-dialog-title"> */}
         <div className="flex justify-between items-center bg-black h-8 rounded-t-sm  px-3">
-          <span className="flex-1 text-center text-white">Create Test</span>
+          <span className="flex-1 text-center text-white">{paper ? "Update" : "Create"} Test Paper</span>
           <div className="w-5 h-5 bg-white flex items-center justify-center rounded-sm">
             <span
               className="text-black cursor-pointer"
               onClick={() => {
                 // setCode('');
                 setOpen(false);
+                setPaper(null);
+                setForm(initialState);
               }}
             >
-              X
+            {reactIcons.close}
             </span>
           </div>
         </div>
@@ -137,8 +154,8 @@ const CreatePaperModal = ({ open, setOpen, handleReload }) => {
 
             <div className="mt-3 flex justify-end">
               <Button
-                name="Create"
-                className={"create-btn"}
+                name={paper ?"Update" :"Create"}
+                className={paper ? "update-btn" : "create-btn"}
                 handleClick={handleCreatePaper}
                 isLoading={isLoading}
               />

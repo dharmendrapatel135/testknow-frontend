@@ -2,7 +2,8 @@ import { Dialog, DialogContent } from "@mui/material";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Button from "../../../../components/FormElements/Button";
-import { getReq, postApiReq } from "../../../../utils/apiHandlers";
+import { deleteReq, getReq, patchReq, postApiReq } from "../../../../utils/apiHandlers";
+import { reactIcons } from "../../../../utils/icons";
 
 
 const initialState = {
@@ -11,7 +12,7 @@ const initialState = {
     image:""
 }
 
-const CreateTestModal = ({ open, setOpen, handleReload }) => {
+const CreateTestModal = ({ open, setOpen, handleReload, test, setTest }) => {
   const [form, setForm] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [categoryList, setCategoryList] = useState([]);
@@ -26,13 +27,16 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
     const formData = new FormData();
     formData.append('title', form.title);
     formData.append('category', form.category);
-    formData.append('image', form.image);
+    if(form.image){
+      formData.append('image', form.image);
+    }
     try {
       setIsLoading(!isLoading);
-      const response = await postApiReq(`/tests/`, formData);
+      const response = await (test ? patchReq(`/tests/${test.id}/`, formData) : postApiReq(`/tests/`, formData));
       setIsLoading(!isLoading)
       if (response.status) {
-        toast.success("Category has been successfully created!");
+        setTest(null);
+        toast.success("Test has been successfully created!");
         setOpen(false);
         handleReload();
         setForm(initialState)
@@ -58,7 +62,13 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
       handleGetCategoryList();
   }, [])
 
-  console.log("-------------category list ", categoryList);
+  useEffect(() => {
+     if(test){
+      setForm((prev) => ({...prev, title:test.title, category:test.category_obj.id}))
+     }
+  }, [test])
+
+  
 
   return (
     <Dialog
@@ -69,16 +79,18 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
       <div className="bg-white w-[400px] md:w-[450px] rounded-[20px] ">
         {/* <DialogTitle id="responsive-dialog-title"> */}
         <div className="flex justify-between items-center bg-black h-8 rounded-t-sm  px-3">
-          <span className="flex-1 text-center text-white">Create Test</span>
+          <span className="flex-1 text-center text-white">{test ? "Update Test" : "Create Test"}</span>
           <div className="w-5 h-5 bg-white flex items-center justify-center rounded-sm">
             <span
               className="text-black cursor-pointer"
               onClick={() => {
                 // setCode('');
                 setOpen(false);
+                setTest(null);
+                setForm({initialState})
               }}
             >
-              X
+              {reactIcons.close}
             </span>
           </div>
         </div>
@@ -123,7 +135,7 @@ const CreateTestModal = ({ open, setOpen, handleReload }) => {
               />
             </div>
             <div className="mt-3 flex justify-end">
-              <Button name="Create" className={'create-btn'} handleClick={handleCreateTest} isLoading={isLoading} />
+              <Button name={test ? "Update" : "Create"} className={test ? 'update-btn' : 'create-btn'} handleClick={handleCreateTest} isLoading={isLoading} />
             </div>
           </div>
         </DialogContent>

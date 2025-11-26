@@ -1,9 +1,10 @@
 import { Dialog, DialogContent } from "@mui/material";
+import { reactIcons } from "../../utils/icons";
 // import { reactIcons } from '@utils/icons.js';
 
 
 
-const DeleteItemModal = ({ openDelModal, setOpenDelModal, handleClick ,isLoading }) => {
+const DeleteItemModal = ({ openDelModal, setOpenDelModal, handleClick }) => {
   return (
     <Dialog
       open={openDelModal}
@@ -13,16 +14,17 @@ const DeleteItemModal = ({ openDelModal, setOpenDelModal, handleClick ,isLoading
       <div className="bg-white w-[400px] md:w-[450px] rounded-[20px] ">
         {/* <DialogTitle id="responsive-dialog-title"> */}
         <div className="flex justify-between items-center bg-black h-8 rounded-t-sm  px-3">
-          <span className="flex-1 text-center text-white"></span>
+          <span className="flex-1 text-center text-white">
+           
+          </span>
           <div className="w-5 h-5 bg-white flex items-center justify-center rounded-sm">
             <span
               className="text-black cursor-pointer"
               onClick={() => {
-                // setCode('');
                 setOpenDelModal(false);
               }}
             >
-              {/* {reactIcons.close} */}
+               {reactIcons.close}
             </span>
           </div>
         </div>

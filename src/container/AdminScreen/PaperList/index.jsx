@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
-import { deleteReq, getReq, postApiReq, postReq } from "../../../utils/apiHandlers";
+import {
+  deleteReq,
+  getReq,
+  postApiReq,
+  postReq,
+} from "../../../utils/apiHandlers";
 import { Link, useParams } from "react-router-dom";
 import Paper from "../../../components/common/Paper";
 import DashboardTemplate from "@components/DashboardTemplate";
 import CreatePaperModal from "./components/CreatePaperModal";
-import moment from 'moment'
+import moment from "moment";
 import { reactIcons } from "../../../utils/icons";
+import Button from "../../../components/FormElements/Button";
 
 const PaperList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [paperData, setPaperData] = useState([]);
   const [open, setOpen] = useState(false);
   const { testId } = useParams();
+  const [paper, setPaper] = useState();
 
   console.log("-------------category id ", testId);
 
@@ -35,65 +42,70 @@ const PaperList = () => {
     }
   }, [testId]);
 
-  const handleDeletePaper = async(id) => {
+  const handleDeletePaper = async (id) => {
     const response = await deleteReq(`/paper/${id}`);
-    if(response.status){
-
-    }else{
-
+    if (response.status) {
+    } else {
     }
-  }
-  
-  
-    const handleFileUpload = async(e) => {
-      const fileData = e.target.files[0];
-      const formData = new FormData();
-      formData.append("file", fileData);
+  };
 
-      try{
-        const response  = await postApiReq(`/paper/upload-papers/?test_ref=${testId}`, formData); 
-        if(response.status){
-  
-        }
-      }catch(err){
+  const handleFileUpload = async (e) => {
+    const fileData = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", fileData);
 
+    try {
+      const response = await postApiReq(
+        `/paper/upload-papers/?test_ref=${testId}`,
+        formData
+      );
+      if (response.status) {
       }
-    }
-  
+    } catch (err) {}
+  };
 
   return (
     <DashboardTemplate>
-      <CreatePaperModal open={open} setOpen={setOpen} handleReload={handleGetPaperList} />
+      <CreatePaperModal
+        open={open}
+        setOpen={setOpen}
+        handleReload={handleGetPaperList}
+        paper={paper}
+        setPaper={setPaper}
+      />
       <Paper>
         <div>
-         <div className="flex justify-between my-1">
+          <div className="flex justify-between my-1">
             <h2 className="py-2  text-lg font-semibold">Test Papers</h2>
-            <button className="create-btn" onClick={() => setOpen(!open)}>Create</button>
-             <div>
-              <label>
-                <div htmlFor="#upload">
-                  {/* <span className="theme-btn btn-style-one small">
-                    {isLoading ? <BtnBeatLoader /> : "Upload CSV File"}
-                  </span> */}Excel
-                </div>
-                <input
-                  type="file"
-                  id="upload"
-                  onChange={handleFileUpload}
-                  className="d-none"
-                  // disabled={isLoading}
-                />
-              </label>
+            <div className="flex gap-2">
+              <button className="create-btn" onClick={() => setOpen(!open)}>
+                Create
+              </button>
+              <div>
+                <label htmlFor="upload" className="cursor-pointer">
+                  <div>
+                    <Button name="Upload Excel" className="update-btn" />
+                  </div>
+
+                  <input
+                    type="file"
+                    id="upload"
+                    onChange={handleFileUpload}
+                    // className="hidden" // Tailwind class to hide input
+                    style={{display:"none"}}
+                  />
+                </label>
+              </div>
             </div>
-        </div>
+          </div>
           <div className="table_div custom-scroll-sm">
             <table className="default-table ">
               <thead className="position-sticky">
                 <th style={{ width: "300px" }}>Test Paper</th>
-                <th style={{width:"100px"}}>Type</th>
-                <th style={{width:"200px"}}>Total Question</th>
-                <th style={{width:"100px"}}>Score</th>
-                <th style={{width:"150px"}}>Duration</th>
+                <th style={{ width: "100px" }}>Type</th>
+                <th style={{ width: "200px" }}>Total Question</th>
+                <th style={{ width: "100px" }}>Score</th>
+                <th style={{ width: "150px" }}>Duration</th>
                 <th style={{ width: "200px" }}>Created By</th>
                 <th style={{ width: "200px" }}>Created At</th>
                 <th style={{ width: "100px" }}>Action</th>
@@ -104,20 +116,39 @@ const PaperList = () => {
                     <>
                       <tr key={index}>
                         <td style={{ width: "300px" }}>
-                          <Link to={`/category-list/test-list/paper-list/section-list/${item.id}`}>
+                          <Link
+                            to={`/category-list/test-list/paper-list/section-list/${item.id}`}
+                          >
                             {item.paper_name}
                           </Link>
                         </td>
-                        <td style={{width:"100px"}}>{item.type}</td>
-                        <td style={{width:"200px"}}>{item.total_question}</td>
-                        <td style={{width:"100px"}}>{item.max_score}</td>
-                        <td style={{width:"150px"}}>{item.duration}</td>
+                        <td style={{ width: "100px" }}>{item.type}</td>
+                        <td style={{ width: "200px" }}>
+                          {item.total_question}
+                        </td>
+                        <td style={{ width: "100px" }}>{item.max_score}</td>
+                        <td style={{ width: "150px" }}>{item.duration}</td>
                         <td style={{ width: "200px" }}>{item.created_by}</td>
-                        <td style={{width:"200px"}}>{moment(item.created_at).format('DD-MM-YYYY hh:mm A')}</td>
-                        <td style={{width:"200px"}}>
+                        <td style={{ width: "200px" }}>
+                          {moment(item.created_at).format("DD-MM-YYYY hh:mm A")}
+                        </td>
+                        <td style={{ width: "200px" }}>
                           <div className="flex gap-2">
-                            <span className="text-green-500 font-[20px]">{reactIcons.edit}</span>
-                            <span className="text-red-500 font-[20px]" onClick={() => handleDeletePaper(item.id)}>{reactIcons.delete}</span>
+                            <span
+                              className="text-green-500 font-[20px] cursor-pointer"
+                              onClick={() => {
+                                setOpen(true);
+                                setPaper(item);
+                              }}
+                            >
+                              {reactIcons.edit}
+                            </span>
+                            <span
+                              className="text-red-500 font-[20px] cursor-pointer"
+                              onClick={() => handleDeletePaper(item.id)}
+                            >
+                              {reactIcons.delete}
+                            </span>
                           </div>
                         </td>
                       </tr>

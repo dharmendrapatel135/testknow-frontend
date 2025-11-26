@@ -119,12 +119,14 @@ const QuestionLibrary = () => {
             })}
           </select>
         </div>
+        <div className="d-flex gap-2">
         <button className="create-btn">
           <Link className="create-btn" to={'/create-question'} target="_blank">
           Create
           </Link>
           </button>
           <input type="file" onChange={handleFileUpload} />
+        </div>
       </div>
       <div className="mt-3">
         {questionsData.map((item, index) => {

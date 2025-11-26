@@ -4,20 +4,22 @@ import Button from "../../../../components/FormElements/Button";
 import { getReq, postApiReq } from "@utils/apiHandlers";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { deleteReq, patchReq } from "../../../../utils/apiHandlers";
+import { reactIcons } from "../../../../utils/icons";
 
 const initialState = {
-  section_name:'',
-//   type:"",
-  total_question:"",
-  score:"",
-  duration:"",
-  paper_ref:""
+  section_name: "",
+  //   type:"",
+  total_question: "",
+  score: "",
+  duration: "",
+  paper_ref: "",
 };
 
-const CreateSectionModal = ({ open, setOpen, handleReload }) => {
+const CreateSectionModal = ({ open, setOpen, handleReload, section, setSection }) => {
   const [form, setForm] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
-  const {paperId} = useParams();
+  const { paperId } = useParams();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,10 +27,10 @@ const CreateSectionModal = ({ open, setOpen, handleReload }) => {
   };
 
   const handleCreatePaperSection = async () => {
-    form['paper_ref'] = paperId;
+    form["paper_ref"] = paperId;
     try {
       setIsLoading(!isLoading);
-      const response = await postApiReq(`/paper/section/`, form);
+      const response = await (section ? patchReq(`/paper/section/${section.id}/`, form) : postApiReq(`/paper/section/`, form));
       setIsLoading(!isLoading);
       if (response.status) {
         toast.success("Section has been successfully created!");
@@ -42,6 +44,17 @@ const CreateSectionModal = ({ open, setOpen, handleReload }) => {
     }
   };
 
+  useEffect(() => {
+    if (section) {
+      setForm((prev) => ({
+        ...prev,
+        section_name: section.section_name,
+        total_question: section.total_question,
+        score: section.score,
+        duration: section.duration.split(":").reduce((acc, time) => 60 * acc + +time),
+      }));
+    }
+  }, [section]);
 
 
   return (
@@ -53,16 +66,18 @@ const CreateSectionModal = ({ open, setOpen, handleReload }) => {
       <div className="bg-white w-[400px] md:w-[450px] rounded-[20px] ">
         {/* <DialogTitle id="responsive-dialog-title"> */}
         <div className="flex justify-between items-center bg-black h-8 rounded-t-sm  px-3">
-          <span className="flex-1 text-center text-white">Create Section</span>
+          <span className="flex-1 text-center text-white">{section ? "Update" :"Create"} Section</span>
           <div className="w-5 h-5 bg-white flex items-center justify-center rounded-sm">
             <span
               className="text-black cursor-pointer"
               onClick={() => {
                 // setCode('');
+                setForm(initialState);
+                setSection(null);
                 setOpen(false);
               }}
             >
-              X
+              {reactIcons.close}
             </span>
           </div>
         </div>
@@ -122,8 +137,8 @@ const CreateSectionModal = ({ open, setOpen, handleReload }) => {
 
             <div className="mt-3 flex justify-end">
               <Button
-                name="Create"
-                className={"create-btn"}
+                name={section ? "Update" : "Create"}
+                className={section? "update-btn" : "create-btn"}
                 handleClick={handleCreatePaperSection}
                 isLoading={isLoading}
               />
