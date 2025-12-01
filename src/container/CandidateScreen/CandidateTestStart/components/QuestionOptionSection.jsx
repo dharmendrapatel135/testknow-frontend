@@ -8,7 +8,7 @@ const QuestionOptionSection = ({ item, setQuestionAnswer, questionAnswer, startT
           return (
             <li
               key={index}
-              className="flex gap-3"
+              className="flex gap-3 items-center my-3"
               onClick={() => {
                 setQuestionAnswer((prev) => ({
                   ...prev,
@@ -23,11 +23,12 @@ const QuestionOptionSection = ({ item, setQuestionAnswer, questionAnswer, startT
               {/* <input type="radio" name="answer_text" value={_item.text} onChange={handleChange} checked={item.candidate_answer == _item.text ? true : false} /> */}
               <input
                 type="radio"
+                className="w-[20px] h-[20px] cursor-pointer"
                 name={`answer_${item.question.id}`} // ← unique per question
                 checked={((questionAnswer.candidate_answer || item.candidate_answer) == _item.text ? true : false)}
               />
-              <span>{_item.text}</span>
-              <p>{_item.text_hindi}</p>
+              <span className="xl:text-lg text-md cursor-pointer">{_item.text}</span>
+              <p className="xl:text-lg text-md cursor-pointer">{_item.text_hindi}</p>
             </li>
           );
         })}

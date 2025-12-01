@@ -32,7 +32,7 @@ const CreatePaperModal = ({ open, setOpen, handleReload, paper, setPaper }) => {
     form["test_ref"] = testId;
     try {
       setIsLoading(!isLoading);
-      const response = await (paper ? patchReq(`/paper/${paper.id}/`) : postApiReq(`/paper/`, form));
+      const response = await (paper ? patchReq(`/paper/${paper.id}/`, form) : postApiReq(`/paper/`, form));
       setIsLoading(!isLoading);
       if (response.status) {
         toast.success(`Test Paper has been successfully ${paper ? 'updated' :'created!'}`);

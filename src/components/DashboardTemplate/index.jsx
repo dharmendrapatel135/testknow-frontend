@@ -33,12 +33,9 @@ function DashboardTemplate({ active, children }) {
 
   return (
     <div className="grid grid-cols-12">
-      <div className="hidden md:block md:col-span-3  xl:col-span-2">
-        <SideBar active={active} />
-      </div>
-      <div className="col-span-full md:col-span-9 xl:col-span-10 overflow-y-auto h-100vh">
-        <div className="h-20">
-          <div className="flex text-black justify-between items-center py-2 px-5" style={{background:"rgb(196 197 225)"}}>
+      <div className="col-span-full md:col-span-12 xl:col-span-12">
+        <div className="h-[8vh]">
+          <div className="flex text-white justify-between items-center px-5" style={{background:"#218fc1"}}>
             <div className="">
               <h1 className="text-24 lg:text-36 font-extrabold">{active}</h1>
             </div>
@@ -95,7 +92,14 @@ function DashboardTemplate({ active, children }) {
             </div>
           </div>
         </div>
-        <div className="p-5">{children}</div>
+      </div>
+      <div className="hidden md:block md:col-span-3   h-[90vh] xl:col-span-2">
+        <div className="h-[90vh]">
+        <SideBar active={active} />
+        </div>
+      </div>
+      <div className="col-span-9 xl:col-span-10  h-[90vh] overflow-y-auto">
+          <div className="p-5 overflow-y-auto h-[90vh]">{children}</div>
       </div>
     </div>
   );

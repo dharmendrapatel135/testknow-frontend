@@ -2,7 +2,7 @@ import MenuList from '../MenuList';
 
 function SideBar({ active }) {
   return (
-    <div className="h-screen" style={{background:"#616298"}}>
+    <div className="h-screen  bg-white shadow">
       <div className="px-10  md:py-10 flex justify-center">
         {/* <h1 className="text-bluewhalelight text-24 font-bold underline">
            <span className="text-green">patel </span>

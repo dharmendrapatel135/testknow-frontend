@@ -198,11 +198,11 @@ const CandidateTestStart = () => {
   return (
     <div>
       <CandidateTestHeader />
-      <div className="h-[75vh] py-2">
+      <div className=" py-2" style={{height:"75vh"}}>
         {questionList.slice(count, count + 1).map((item, index) => {
           return (
-            <div key={item.id} className="grid grid-cols-7 gap-4">
-              <div className="col-span-5 bg-gray-100 p-4 h-[82vh]">
+            <div key={item.id} className="grid grid-cols-7 gap-4" >
+              <div className="col-span-5 bg-gray-100 p-4">
                 <div className="flex gap-4">
                   <div className="w-full">
                     <QuestionSection
