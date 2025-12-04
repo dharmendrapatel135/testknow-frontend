@@ -2,13 +2,7 @@ import MenuList from '../MenuList';
 
 function SideBar({ active }) {
   return (
-    <div className="h-screen  bg-white shadow">
-      <div className="px-10  md:py-10 flex justify-center">
-        {/* <h1 className="text-bluewhalelight text-24 font-bold underline">
-           <span className="text-green">patel </span>
-        </h1> */}
-        <img src='/images/logo/testknow.png'  style={{width:"100px", height:"100px"}}/>
-      </div>
+    <div className="h-[calc(100vh-92px)] bg-gray-50 shadow">
       <MenuList active={active} />
       <div className="block md:hidden px-5">
         <hr></hr>

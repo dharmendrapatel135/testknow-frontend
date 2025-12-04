@@ -4,7 +4,7 @@
 const Paper = ({children, style}) => {
 
     return(
-        <div className="shadow-lg p-3 my-2 bg-white rounded-1 " style={style}>
+        <div className="shadow p-3 my-2 rounded-2 " style={style}>
             {children}
         </div>
     )

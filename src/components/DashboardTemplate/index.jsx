@@ -32,10 +32,11 @@ function DashboardTemplate({ active, children }) {
 
 
   return (
+    <>
     <div className="grid grid-cols-12">
       <div className="col-span-full md:col-span-12 xl:col-span-12">
-        <div className="h-[8vh]">
-          <div className="flex text-white justify-between items-center px-5" style={{background:"#218fc1"}}>
+        <div className="h-[60px]">
+          <div className="flex text-white justify-between items-center px-5" style={{background:"#60B5FF"}}>
             <div className="">
               <h1 className="text-24 lg:text-36 font-extrabold">{active}</h1>
             </div>
@@ -93,15 +94,20 @@ function DashboardTemplate({ active, children }) {
           </div>
         </div>
       </div>
-      <div className="hidden md:block md:col-span-3   h-[90vh] xl:col-span-2">
-        <div className="h-[90vh]">
+    </div>
+    <div className="flex h-[calc(100vh-80px)]">
+      {/* <div className="hidden md:block md:col-span-3   h-[90vh] xl:col-span-2"> */}
+        <div className="w-[15%]">
+        <div className="">
         <SideBar active={active} />
         </div>
       </div>
-      <div className="col-span-9 xl:col-span-10  h-[90vh] overflow-y-auto">
-          <div className="p-5 overflow-y-auto h-[90vh]">{children}</div>
+      {/* <div className="col-span-9 xl:col-span-10  h-[90vh] overflow-y-auto"> */}
+      <div className="w-[85%]">
+          <div className="p-5 overflow-y-auto">{children}</div>
       </div>
     </div>
+    </>
   );
 }
 

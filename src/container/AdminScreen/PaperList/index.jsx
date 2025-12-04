@@ -82,24 +82,23 @@ const PaperList = () => {
                 Create
               </button>
               <div>
-                <label htmlFor="upload" className="cursor-pointer">
-                  <div>
-                    <Button name="Upload Excel" className="update-btn" />
-                  </div>
-
-                  <input
-                    type="file"
-                    id="upload"
-                    onChange={handleFileUpload}
-                    // className="hidden" // Tailwind class to hide input
-                    style={{display:"none"}}
-                  />
+                <label
+                  htmlFor="upload"
+                  className="cursor-pointer update-btn inline-block p-2"
+                >
+                  Upload Excel
                 </label>
+                <input
+                  type="file"
+                  id="upload"
+                  onChange={handleFileUpload}
+                  style={{ display: "none" }}
+                />
               </div>
             </div>
           </div>
           <div className="table_div custom-scroll-sm">
-            <table className="default-table ">
+            <table className="default-table">
               <thead className="position-sticky">
                 <th style={{ width: "300px" }}>Test Paper</th>
                 <th style={{ width: "100px" }}>Type</th>

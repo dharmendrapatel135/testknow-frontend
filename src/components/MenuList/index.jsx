@@ -4,11 +4,12 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const menuList = [
-  { name: "DASHBOARD", url: "/dashboard", id: "" },
-  { name: "CATEGORY LIST", url: "/category-list", id: "" },
-  { name: "TESTS", url: "/candidate-test-list", id: "" },
-  { name: "QUESTION LIBRARY", url: "/question-library", id: "" },
-  // { name: "JOB POSTING", url: "/employers-dashboard/job-posts", id: "" },
+  { name: "Dashboard", url: "/dashboard", id: "" },
+  { name: "Category List", url: "/category-list", id: "" },
+  { name: "Tests", url: "/candidate-test-list", id: "" },
+  { name: "Question Library", url: "/question-library", id: "" },
+  { name: "Create Package", url: "/create-package", id: "" },
+  { name: "Packages", url: "/package-details", id: "" },
   // { name: "APPLICANTS", url: "/employers-dashboard/all-applicants", id: "" },
   // { name: "MY ASSIGN JOBS", url: "/employers-dashboard/my-assign-jobs" },
   // {
@@ -83,9 +84,9 @@ function MenuList({ active }) {
 
 
   const filteredMenuList = menuList.filter((item) => {
-    if(userDetails?.role === 'admin' && (item.name == "TESTS")){
+    if(userDetails?.role === 'admin' && (item.name == "Tests")){
      return false
-    }else if(userDetails?.role === 'aspirant' && (item.name == "CATEGORY LIST" || item.name == "QUESTION LIBRARY")){
+    }else if(userDetails?.role === 'aspirant' && (item.name == "Category List" || item.name == "Question Library" || item.name == "Create Package")){
       return false;
     }else {
       return true;
@@ -95,13 +96,13 @@ function MenuList({ active }) {
 
   return (
     <nav className="nav main-menu" style={{ height: "80px" }}>
-      <ul className="text-center" id="navbar">
+      <ul className="px-5 mx-5" id="navbar">
         {filteredMenuList.map((item, index) => (
           <li
             key={index}
             className={`  ${
-              isActiveLink(item.url, pathname) ? "active my-2 mx-2 py-2 bg-black" : ""
-            } ${item.options ? "dropdown" : ""}`}
+              isActiveLink(item.url, pathname) ? "active " : ""
+            } ${item.options ? "dropdown" : ""} my-3`}
             // onClick={() => handleDropdownToggle(item.id)}
           >
             <Link
@@ -109,15 +110,15 @@ function MenuList({ active }) {
               passHref
               className={`${
                 isActiveLink(item.url, pathname)
-                  ? "active bg-black text-white rounded-1"
+                  ? "active text-[rgb(96, 181, 255)] rounded-1"
                   : ""
               }`}
             >
               <span
                 className={`nav-link ${
                   isActiveLink(item.url, pathname)
-                    ? "active text-white fw-600"
-                    : "text-black fw-600"
+                    ? "active text-[rgb(96, 181, 255)] text-lg fw-600"
+                    : "text-black text-lg fw-600"
                 }`}
               >
                 {item.name}

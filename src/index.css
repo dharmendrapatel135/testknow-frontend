@@ -57,12 +57,12 @@ tbody tr:nth-child(even) {
   margin-bottom: 30px;
   overflow: visible;
   width: 100%;
-  /* max-width: 700px; */
-  /* min-width: 350px; */
+  max-height: 800px; 
+  /* min-height: 350px; */
 }
 
 td{
-  padding: 2px 5px;
+  padding: 8px 5px;
 }
 
 
@@ -93,7 +93,7 @@ td{
 
 
 .default-table thead {
-  background: black;
+  background: #FF9149;
   color: white;
   position: sticky;
   top: 0;
