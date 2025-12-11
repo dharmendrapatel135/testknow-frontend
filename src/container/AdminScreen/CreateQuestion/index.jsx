@@ -87,7 +87,7 @@ form.options.forEach((opt, index) => {
       const response = await postApiReq(`/questions/`, formData);
       if (response.status) {
         toast.success("Question has been successfully created!");
-        setForm(initialState);
+        // setForm(initialState);
       }
     } catch (err) {}
   };

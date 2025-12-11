@@ -12,13 +12,12 @@ const QuestionSection = ({
   timeLeft,
 }) => {
 
-  console.log("-------------item ", item);
   return (
     <div className="flex w-full">
       <div>
       {item.question.que_description &&
-      <div className="w-[70%]">
-        <div className="my-2">
+      <div className={`${item.question.que_description ? "w-[100%]" : "w-[70%]"} px-2`}>
+        <div className="my-2 text-lg">
          {item.question.que_description}
         </div>
         <div className="my-3">
@@ -32,14 +31,14 @@ const QuestionSection = ({
         </div>
         }
       </div>
-      <div className={`${item.que_description ? "w-[30%]" : "w-[100%]"} border border-gray-200 px-5 h-[75vh]`}>
+      <div className={`${item.question.que_description ? "w-[100%]" : "w-[100%]"} border rounded-md border-gray-200 px-5 h-[75vh]`}>
       <div>
         <div>
-          <h4 className="font-bold text-xl py-2 mb-2">Q. {count+1} {item.question.question_text}</h4>
+          <h4 className="font-[400] text-lg py-1 mb-2">Q. {count+1} {item.question.question_text}</h4>
         </div>
         {item.question.question_text_hindi &&
-         <div>
-          <h4 className="font-bold text-xl mb-2">Q. {count+1} {item.question.question_text_hindi}</h4>
+         <div className="">
+          <h4 className="font-[400] text-md py-1 mb-2 ms-4">{item.question.question_text_hindi}</h4>
         </div>
         }
       <div>

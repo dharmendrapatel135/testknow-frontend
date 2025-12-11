@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { deleteReq, getReq } from "../../../utils/apiHandlers";
+import { deleteReq, getReq, postApiReq } from "../../../utils/apiHandlers";
 import { Link, useParams } from "react-router-dom";
 import Paper from "../../../components/common/Paper";
 import DashboardTemplate from "../../../components/DashboardTemplate";
 import CreateSectionModal from "./components/CreateSectionModal";
 import { reactIcons } from "../../../utils/icons";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 const SectionList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -44,6 +45,26 @@ const SectionList = () => {
     } catch (err) {}
   };
 
+  const handleFileUpload = async (e) => {
+    const fileData = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", fileData);
+
+    try {
+      const response = await postApiReq(
+        `/paper/upload-sections/?paper_ref=${paperId}`,
+        {
+          headers: {
+            "X-CSRFToken": csrftoken,
+          },
+        },
+        formData
+      );
+      if (response.status) {
+      }
+    } catch (err) {}
+  };
+
   return (
     <DashboardTemplate>
       <Paper>
@@ -57,15 +78,32 @@ const SectionList = () => {
         <div>
           <div className="flex justify-between my-1">
             <h2 className="py-2  text-lg font-semibold">Paper Section List</h2>
-            <button
-              className="create-btn"
-              onClick={() => {
-                setOpen(true);
-                setSection(null);
-              }}
-            >
-              Create
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                className="create-btn"
+                onClick={() => {
+                  setOpen(true);
+                  setSection(null);
+                }}
+              >
+                Create
+              </button>
+              <div className="flex justify-center">
+                <label
+                  htmlFor="upload"
+                  className="cursor-pointer inline-flex items-center justify-center px-2 py-1 bg-blue-600 text-white rounded-sm hover:bg-blue-700"
+                >
+                  Upload Excel
+                </label>
+                <input
+                  type="file"
+                  id="upload"
+                  onChange={handleFileUpload}
+                  // className="hidden"
+                  style={{ display: "none" }}
+                />
+              </div>
+            </div>
           </div>
           <div className="table_div custom-scroll-sm">
             <table className="default-table ">
@@ -96,7 +134,9 @@ const SectionList = () => {
                         <td style={{ width: "100px" }}>{item.score}</td>
                         <td style={{ width: "150px" }}>{item.duration}</td>
                         <td style={{ width: "200px" }}>{item.created_by}</td>
-                        <td style={{ width: "200px" }}>{item.created_at}</td>
+                        <td style={{ width: "200px" }}>
+                          {moment(item.created_at).format("DD-MM-YYYY hh:mm A")}
+                        </td>
                         <td style={{ width: "200px" }}>
                           <div className="flex gap-2">
                             <span

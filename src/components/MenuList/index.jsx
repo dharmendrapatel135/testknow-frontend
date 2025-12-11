@@ -2,14 +2,40 @@ import { Link } from "react-router-dom";
 import { isActiveLink } from "../../utils/linkActiveChecker";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { reactIcons } from "../../utils/icons";
 
 const menuList = [
-  { name: "Dashboard", url: "/dashboard", id: "" },
-  { name: "Category List", url: "/category-list", id: "" },
-  { name: "Tests", url: "/candidate-test-list", id: "" },
-  { name: "Question Library", url: "/question-library", id: "" },
-  { name: "Create Package", url: "/create-package", id: "" },
-  { name: "Packages", url: "/package-details", id: "" },
+  { name: "Dashboard", url: "/dashboard", id: "", icon: reactIcons.dashboard },
+  {
+    name: "Category List",
+    url: "/category-list",
+    id: "",
+    icon: reactIcons.category,
+  },
+  {
+    name: "Tests",
+    url: "/candidate-test-list",
+    id: "",
+    icon: reactIcons.tests,
+  },
+  {
+    name: "Question Library",
+    url: "/question-library",
+    id: "",
+    icon: reactIcons.library,
+  },
+  {
+    name: "Create Package",
+    url: "/create-package",
+    id: "",
+    icon: reactIcons.package,
+  },
+  {
+    name: "Packages",
+    url: "/package-details",
+    id: "",
+    icon: reactIcons.package,
+  },
   // { name: "APPLICANTS", url: "/employers-dashboard/all-applicants", id: "" },
   // { name: "MY ASSIGN JOBS", url: "/employers-dashboard/my-assign-jobs" },
   // {
@@ -82,20 +108,23 @@ function MenuList({ active }) {
   const pathname = location.pathname;
   const userDetails = useSelector((state) => state.user.userInfo);
 
-
   const filteredMenuList = menuList.filter((item) => {
-    if(userDetails?.role === 'admin' && (item.name == "Tests")){
-     return false
-    }else if(userDetails?.role === 'aspirant' && (item.name == "Category List" || item.name == "Question Library" || item.name == "Create Package")){
+    if (userDetails?.role === "admin" && item.name == "Tests") {
       return false;
-    }else {
+    } else if (
+      userDetails?.role === "aspirant" &&
+      (item.name == "Category List" ||
+        item.name == "Question Library" ||
+        item.name == "Create Package")
+    ) {
+      return false;
+    } else {
       return true;
     }
-  })
-
+  });
 
   return (
-    <nav className="nav main-menu" style={{ height: "80px" }}>
+    <div className="pt-2">
       <ul className="px-5 mx-5" id="navbar">
         {filteredMenuList.map((item, index) => (
           <li
@@ -114,15 +143,26 @@ function MenuList({ active }) {
                   : ""
               }`}
             >
-              <span
-                className={`nav-link ${
-                  isActiveLink(item.url, pathname)
-                    ? "active text-[rgb(96, 181, 255)] text-lg fw-600"
-                    : "text-black text-lg fw-600"
-                }`}
-              >
-                {item.name}
-              </span>
+              <div className="flex gap-2 place-items-center">
+                <span
+                  className={`nav-link ${
+                    isActiveLink(item.url, pathname)
+                      ? "active text-[rgb(96, 181, 255)] text-lg fw-600"
+                      : "text-black text-lg fw-600"
+                  }`}
+                >
+                  {item.icon}
+                </span>
+                <span
+                  className={`nav-link ${
+                    isActiveLink(item.url, pathname)
+                      ? "active text-[rgb(96, 181, 255)] text-lg fw-600"
+                      : "text-black text-lg fw-600"
+                  }`}
+                >
+                  {item.name}
+                </span>
+              </div>
             </Link>
 
             {/* Dropdown Menu for Reports */}
@@ -178,7 +218,7 @@ function MenuList({ active }) {
           </li>
         ))}
       </ul>
-    </nav>
+    </div>
   );
 }
 

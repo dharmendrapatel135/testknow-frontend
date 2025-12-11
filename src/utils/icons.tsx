@@ -99,6 +99,13 @@ import {
 import { GoVerified } from 'react-icons/go';
 import { RiSecurePaymentLine, RiFlashlightLine } from 'react-icons/ri';
 import { IoCloseCircle } from "react-icons/io5";
+import { MdOutlineCategory } from "react-icons/md";
+import { SiTestrail } from "react-icons/si";
+import { CgPlayListSearch } from "react-icons/cg";
+import { ImLibrary } from "react-icons/im";
+import { PiListHeartFill } from "react-icons/pi";
+
+
 
 
 export const reactIcons = {
@@ -194,4 +201,8 @@ export const reactIcons = {
   whatsapp: <IoLogoWhatsapp />,
   messenger: <FaFacebookMessenger />,
   sms: <FaSms />,
+  package:<PiListHeartFill />,
+  tests:<SiTestrail />,
+  category:<MdOutlineCategory />,
+  library:<ImLibrary />
 };

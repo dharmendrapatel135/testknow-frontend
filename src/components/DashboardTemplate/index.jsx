@@ -3,6 +3,7 @@ import SideBar from "../Sidebar";
 import { toast } from "react-toastify";
 import { postReq } from "../../utils/apiHandlers";
 import { useSelector } from "react-redux";
+import { reactIcons } from "../../utils/icons";
 // import { reactIcons } from "../../utils/icons";
 
 function DashboardTemplate({ active, children }) {
@@ -35,22 +36,24 @@ function DashboardTemplate({ active, children }) {
     <>
     <div className="grid grid-cols-12">
       <div className="col-span-full md:col-span-12 xl:col-span-12">
-        <div className="h-[60px]">
+        <div >
           <div className="flex text-white justify-between items-center px-5" style={{background:"#60B5FF"}}>
             <div className="">
-              <h1 className="text-24 lg:text-36 font-extrabold">{active}</h1>
+              <h1 className="text-xl font-bold text-orange-300">Test Know</h1>
             </div>
             <div className="flex justify-center items-center relative">
               <div className="px-5">
                 {/* <SelectField selectClass="bg-bluewhale text-white h-9 p-2 rounded-lg" /> */}
+              
               </div>
+
               <div
                 className="block text-black md:hidden"
                 onClick={() => setOpen(true)}
               >
                 <p>menu</p>
               </div>
-              <div className="hidden md:flex justify-center items-center  py-3">
+              <div className="hidden md:flex justify-center items-center cursor-pointer  py-3" onClick={() => setOpenOpt(!openOpt)}>
                 <div className="px-2">
                   {/* <img src="/images/icons/dummy.png" alt="prof_img" /> */}
                 </div>
@@ -59,17 +62,11 @@ function DashboardTemplate({ active, children }) {
                   <span className="text-16 text-lightgray">
                     xyz@gmail.com
                   </span>
-                  <span onClick={() => setOpenOpt(!openOpt)}>log</span>
                 </div>
-                {/* <div className="px-2">
-                  <img
-                    src="/images/icons/expand_more.png"
-                    alt="down_arrow"
-                    onClick={() => setOpenOpt(!openOpt)}
-                  />
-                </div> */}
+                  <span className="text-xl font-bold" >{reactIcons.arrowdown}</span>
+                
                 {openOpt && (
-                  <div className="bg-white w-40 h-15 rounded-md top-20 z-30 border-[1px] text-black absolute">
+                  <div className="bg-white w-40 shadow-2xl h-15 rounded-md top-20 z-30 border-[1px] text-black absolute">
                     <div className="p-5" onClick={handleLogout}>
                       <p>Logout</p>
                     </div>
@@ -95,7 +92,7 @@ function DashboardTemplate({ active, children }) {
         </div>
       </div>
     </div>
-    <div className="flex h-[calc(100vh-80px)]">
+    <div className="flex h-[calc(100vh-92px)]">
       {/* <div className="hidden md:block md:col-span-3   h-[90vh] xl:col-span-2"> */}
         <div className="w-[15%]">
         <div className="">

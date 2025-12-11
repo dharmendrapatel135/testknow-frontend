@@ -27,8 +27,10 @@ const QuestionOptionSection = ({ item, setQuestionAnswer, questionAnswer, startT
                 name={`answer_${item.question.id}`} // ← unique per question
                 checked={((questionAnswer.candidate_answer || item.candidate_answer) == _item.text ? true : false)}
               />
-              <span className="xl:text-lg text-md cursor-pointer">{_item.text}</span>
-              <p className="xl:text-lg text-md cursor-pointer">{_item.text_hindi}</p>
+              <div>
+              <span className="xl:text-md text-md cursor-pointer">{_item.text}</span>
+              <p className="xl:text-md text-md cursor-pointer">{_item.text_hindi}</p>
+              </div>
             </li>
           );
         })}

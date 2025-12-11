@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import Button from "../../../../components/FormElements/Button";
 import { getReq, postApiReq } from "@utils/apiHandlers";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { reactIcons } from "../../../../utils/icons";
 
 
 
@@ -53,7 +54,7 @@ const CandidatePaperScoreCardModal = ({ open, setOpen, paperDetails }) => {
                 setOpen(false);
               }}
             >
-              X
+            {reactIcons.close}
             </span>
           </div>
         </div>
@@ -102,7 +103,11 @@ const CandidatePaperScoreCardModal = ({ open, setOpen, paperDetails }) => {
                             <td>{item.section_score}</td>
                             <td>{item.section_spent_time} Secs</td>
                             {/* <td>{item.total_questions}</td> */}
-                            <td>view</td>
+                            <td>
+                              <Link to={`/test-paper-solution/${paperDetails?.id}?paper_name=${paperDetails?.paper_name}`} >
+                              View
+                              </Link>
+                            </td>
                           </tr>
                           )
                         })

@@ -68,7 +68,7 @@ td{
 
 
 .default-table thead th {
-  padding: 10px 30px;
+  padding:  8px 5px;
   font-size: 16px;
   font-weight: 400;
   line-height: 30px;
@@ -116,7 +116,7 @@ td{
 }
 
 .create-btn{
-  background-color: #646cff;
+  background-color: #e9980c;
   padding: 0px 12px;
   color: white;
   border-radius: 5px;
@@ -126,7 +126,7 @@ td{
 }
 
 .update-btn{
-  background-color:#177197d1;
+  background-color:#34aadc;
   padding: 0px 12px;
   color: white;
   border-radius: 5px;

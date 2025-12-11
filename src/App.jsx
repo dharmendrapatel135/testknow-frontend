@@ -27,6 +27,7 @@ import CandidateTestStart from '@CandidateScreen/CandidateTestStart';
 import CandidateTestInstruction from '@CandidateScreen/CandidateTestInstruction';
 import Package from './container/Package';
 import CreatePackage from './container/AdminScreen/CreatePackage';
+import CandidateTestPaperSolution from './container/CandidateScreen/CandidateTestPaperSolution';
 
 
 
@@ -55,6 +56,7 @@ function App() {
           <Route path={'/package-details'}  element={<Package />}   />
           <Route path={'/create-package'}  element={<CreatePackage />}   />
           <Route path={'/test-instruction/start-test/:paperId/section'}  element={<CandidateTestStart />}   />
+          <Route  path={`/test-paper-solution/:paperId`}  element={<CandidateTestPaperSolution />}  />
         </Routes>
       </Router>
        <ToastContainer
