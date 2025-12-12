@@ -7,7 +7,7 @@ const Landing = ()=>{
     const [type, setType] = useState('Registration');
     return(
         <div className="text-gray-700 w-full h-[100vh]">
-            <div  className="p-5 bg-[#60B5FF]" >
+            <div  className="p-5 bg-[#154065]" >
             <div className="flex justify-between align-items-center" >
              <div>
                 <h1 className="text-xl font-bold text-orange-300">Test Know</h1>
@@ -15,13 +15,13 @@ const Landing = ()=>{
              <LoginRegModal open={open} setOpen={setOpen} type={type} />
              <div className="flex gap-2">
                 {/* <Link to='/login'> */}
-                <button className="text-black font-[500] py-2 border-gray-50 bg-gray-50 hover:bg-blue-800 hover:text-white hover:border-blue-800 px-2 rounded-sm" onClick={() =>{ 
+                <button className="text-black font-[500] py-2 border-gray-50 bg-gray-50 hover:bg-[#f9ab00] hover:text-white hover:border-[#f9ab00] px-2 rounded-sm" onClick={() =>{ 
                     setType('Login')
                     setOpen(true)
                     }}>Login</button>
                 {/* </Link> */}
                 {/* <Link to='/register'> */}
-                <button className="text-black font-[500] py-2 border-gray-50 bg-gray-50 hover:bg-blue-800 hover:text-white hover:border-blue-800 px-2 rounded-sm" onClick={() =>{
+                <button className="text-black font-[500] py-2 border-gray-50 bg-gray-50 hover:bg-[#f9ab00] hover:text-white hover:border-[#f9ab00] px-2 rounded-sm" onClick={() =>{
                     setOpen(true)
                     setType('Registration')
                 } 

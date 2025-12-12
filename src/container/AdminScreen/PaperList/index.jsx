@@ -12,6 +12,7 @@ import CreatePaperModal from "./components/CreatePaperModal";
 import moment from "moment";
 import { reactIcons } from "../../../utils/icons";
 import Button from "../../../components/FormElements/Button";
+import { toast } from "react-toastify";
 
 const PaperList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -60,6 +61,8 @@ const PaperList = () => {
         formData
       );
       if (response.status) {
+        toast.success("Paper has been successfully uploaded!");
+        handleGetPaperList();
       }
     } catch (err) {}
   };
@@ -77,14 +80,14 @@ const PaperList = () => {
         <div>
           <div className="flex justify-between my-1">
             <h2 className="py-2  text-lg font-semibold">Test Papers</h2>
-            <div className="flex gap-2">
+            <div className="flex gap-2 place-items-center">
               <button className="create-btn" onClick={() => setOpen(!open)}>
                 Create
               </button>
-              <div>
+                <div className="flex justify-center">
                 <label
                   htmlFor="upload"
-                  className="cursor-pointer update-btn inline-block p-2"
+                  className="cursor-pointer inline-flex items-center justify-center px-2 py-1 bg-[#1967d2] text-white rounded-sm hover:bg-blue-700"
                 >
                   Upload Excel
                 </label>
@@ -92,6 +95,7 @@ const PaperList = () => {
                   type="file"
                   id="upload"
                   onChange={handleFileUpload}
+                  // className="hidden"
                   style={{ display: "none" }}
                 />
               </div>

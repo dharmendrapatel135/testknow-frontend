@@ -6,7 +6,7 @@ import Paper from "@components/common/Paper";
 import CreateTestModal from "./components/CreateTestModal";
 import moment from "moment";
 import { reactIcons } from "../../../utils/icons";
-import { deleteReq } from "../../../utils/apiHandlers";
+import { deleteReq, postApiReq } from "../../../utils/apiHandlers";
 import { toast } from "react-toastify";
 
 const TestList = () => {
@@ -36,21 +36,36 @@ const TestList = () => {
       handleGetTestList();
     }
   }, [categoryId]);
-  
 
-  const handleDelteTest = async(id) => {
-    console.log("-----working thiss")
-      try{
-        const response = await deleteReq(`/tests/${id}`);
-        console.log("-----------responser ", response);
-        if(response.status){
-             toast.success('Test has been deleted successfully')  
-             handleGetTestList();
-        }
-      }catch(err){
-  
+  const handleDelteTest = async (id) => {
+    console.log("-----working thiss");
+    try {
+      const response = await deleteReq(`/tests/${id}`);
+      console.log("-----------responser ", response);
+      if (response.status) {
+        toast.success("Test has been deleted successfully");
+        handleGetTestList();
       }
-    }
+    } catch (err) {}
+  };
+
+  const handleFileUpload = async (e) => {
+    const fileData = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", fileData);
+
+    try {
+      const response = await postApiReq(
+        `/tests/upload-tests/?category_ref=${categoryId}`,
+
+        formData
+      );
+      if (response.status) {
+        handleGetTestList();
+        toast.success("Test has been successfully uploaded!");
+      }
+    } catch (err) {}
+  };
 
   return (
     <DashboardTemplate>
@@ -66,11 +81,31 @@ const TestList = () => {
         <div>
           <div className="flex justify-between my-1">
             <h2 className="py-2  text-lg font-semibold">Test List</h2>
-            <button className="create-btn" onClick={() =>{
-               setOpen(!open)
-               }}>
-              Create
-            </button>
+            <div className="flex gap-2 items-center">
+              <button
+                className="create-btn"
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
+                Create
+              </button>
+              <div className="flex justify-center">
+                <label
+                  htmlFor="upload"
+                  className="cursor-pointer inline-flex items-center justify-center px-2 py-1 bg-[#1967d2] text-white rounded-sm hover:bg-blue-700"
+                >
+                  Upload Excel
+                </label>
+                <input
+                  type="file"
+                  id="upload"
+                  onChange={handleFileUpload}
+                  // className="hidden"
+                  style={{ display: "none" }}
+                />
+              </div>
+            </div>
           </div>
           <div className="table_div custom-scroll-sm">
             <table className="default-table ">

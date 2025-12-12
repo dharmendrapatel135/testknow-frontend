@@ -53,14 +53,12 @@ const SectionList = () => {
     try {
       const response = await postApiReq(
         `/paper/upload-sections/?paper_ref=${paperId}`,
-        {
-          headers: {
-            "X-CSRFToken": csrftoken,
-          },
-        },
+
         formData
       );
       if (response.status) {
+        toast.success("Section has been successfully uploaded!")
+        handleGetSectionList();
       }
     } catch (err) {}
   };
@@ -91,7 +89,7 @@ const SectionList = () => {
               <div className="flex justify-center">
                 <label
                   htmlFor="upload"
-                  className="cursor-pointer inline-flex items-center justify-center px-2 py-1 bg-blue-600 text-white rounded-sm hover:bg-blue-700"
+                  className="cursor-pointer inline-flex items-center justify-center px-2 py-1 bg-[#1967d2] text-white rounded-sm hover:bg-blue-700"
                 >
                   Upload Excel
                 </label>

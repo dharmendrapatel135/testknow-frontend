@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SideBar from "../Sidebar";
 import { toast } from "react-toastify";
-import { postReq } from "../../utils/apiHandlers";
+import { postApiReq, postReq } from "../../utils/apiHandlers";
 import { useSelector } from "react-redux";
 import { reactIcons } from "../../utils/icons";
 // import { reactIcons } from "../../utils/icons";
@@ -16,12 +16,13 @@ function DashboardTemplate({ active, children }) {
           refresh:token.refresh
     }
           try{
-              const response = await postReq(`/logout/`, data);
+              const response = await postApiReq(`/logout/`, data);
+              console.log("--------------responser ", response);
               if(response.status){
+                window.location.href = '/'  
                   Cookies.remove("is_user_token");
                   Cookies.remove("is_user_refresh"); // expires in 1 day
                   // navigate('/dashboard')
-                  window.location.href = '/'  
               }else if(!response.status){
                  toast.error(response.error.message);
               }
@@ -37,9 +38,10 @@ function DashboardTemplate({ active, children }) {
     <div className="grid grid-cols-12">
       <div className="col-span-full md:col-span-12 xl:col-span-12">
         <div >
-          <div className="flex text-white justify-between items-center px-5" style={{background:"#60B5FF"}}>
-            <div className="">
-              <h1 className="text-xl font-bold text-orange-300">Test Know</h1>
+          <div className="flex text-white justify-between items-center px-5" style={{background:"#154065"}}>
+            <div className="border-[3px] border-solid bg-indigo-900 px-2 rounded-tl-2xl rounded-br-2xl">
+              <h1 className="text-[30px] font-bold text-orange-300">Test<sub className="text-white"><i>know</i></sub></h1>
+               {/* <img src="/images/logo/02t.png" className="w-[150px] h-[50px]" alt="logo_img" /> */}
             </div>
             <div className="flex justify-center items-center relative">
               <div className="px-5">

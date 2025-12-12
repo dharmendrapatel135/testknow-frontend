@@ -1,6 +1,7 @@
 import { Dialog, DialogContent } from "@mui/material";
 import LoginSection from "./LoginSection";
 import RegistrationSection from "./RegistrationSection";
+import { reactIcons } from "../../../utils/icons";
 
 
 
@@ -25,7 +26,7 @@ const LoginRegModal = ({ open, setOpen, type }) => {
                 setOpen(false);
               }}
             >
-              X
+            {reactIcons.close}
             </span>
           </div>
         </div>

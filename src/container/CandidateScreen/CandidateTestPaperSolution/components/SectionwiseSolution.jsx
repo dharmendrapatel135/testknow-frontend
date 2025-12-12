@@ -3,14 +3,13 @@ import { useEffect, useState } from "react";
 import { getReq } from "../../../../utils/apiHandlers";
 import Paper from "../../../../components/common/Paper";
 
-const SectionwiseSolution = ({questionList, sectionList, setSectionId}) => {
+const SectionwiseSolution = ({questionList, sectionList, setSectionId, setDetailSolution}) => {
 
 
   return (
     <Paper>
       <div className="flex justify-between">
         <div>
-         
         </div>
         <div>
           <select onChange={(e) => setSectionId(e.target.value)}>
@@ -45,6 +44,7 @@ const SectionwiseSolution = ({questionList, sectionList, setSectionId}) => {
               className={`flex justify-between rounded-sm my-2 p-2 ${
                 index % 2 ? "bg-gray-50" : "bg-green-50"
               }`}
+              onClick={() => setDetailSolution(true)}
             >
               <div className="w-[5%]">
                 <h1 className="">{index + 1}</h1>

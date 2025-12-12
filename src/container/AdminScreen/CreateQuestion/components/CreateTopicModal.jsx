@@ -38,6 +38,20 @@ const CreateTopicModal = ({ openTopic, setOpenTopic, handleReload, subjectList }
     }
   };
 
+    const handleFileUpload = async (e) => {
+      const fileData = e.target.files[0];
+      const formData = new FormData();
+      formData.append("file", fileData);
+  
+      try {
+        const response = await postApiReq(
+          `/paper/upload-subject-toipc/?subject_ref=${form.subject_ref}`,
+          formData
+        );
+        if (response.status) {
+        }
+      } catch (err) {}
+    };
   
 
   return (
@@ -73,6 +87,24 @@ const CreateTopicModal = ({ openTopic, setOpenTopic, handleReload, subjectList }
                 className="input"
               />
             </div>
+              <div className="text-center">
+                <p>Or</p>
+              </div>
+               <div className="flex justify-center">
+                <label
+                  htmlFor="upload"
+                  className="cursor-pointer inline-flex items-center justify-center px-2 py-1 bg-[#1967d2] text-white rounded-sm hover:bg-blue-700"
+                >
+                  Upload Excel
+                </label>
+                <input
+                  type="file"
+                  id="upload"
+                  onChange={handleFileUpload}
+                  // className="hidden"
+                  style={{ display: "none" }}
+                />
+              </div>
             <div>
               <p>Subject</p>
               <select
@@ -92,7 +124,7 @@ const CreateTopicModal = ({ openTopic, setOpenTopic, handleReload, subjectList }
             </select>
             </div>
             <div className="mt-3 flex justify-end">
-              <Button name="Create" className={'create-btn'} handleClick={handleCreateTopic} isLoading={isLoading} />
+              <Button name="Create" className={'create-btn'} handleClick={form.topic ?  handleCreateTopic : handleFileUpload } isLoading={isLoading} />
             </div>
           </div>
         </DialogContent>

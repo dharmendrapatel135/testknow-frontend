@@ -12,6 +12,7 @@ const CandidateTestPaperSolution = () => {
   const [sectionId, setSectionId] = useState(null);
   const [questionList, setQuestionList] = useState([]);
   const [count, setCount] = useState(0);
+  const [detailSolution, setDetailSolution] = useState(false);
 
   const handleGetSectionList = async () => {
     try {
@@ -80,11 +81,7 @@ const CandidateTestPaperSolution = () => {
   return (
     <div>
       <CandidateTestHeader />
-      {/* <SectionwiseSolution
-        questionList={questionList}
-        sectionList={sectionList}
-        setSectionId={setSectionId}
-      /> */}
+      {detailSolution ?
        <div className=" py-2" style={{ height: "75vh" }}>
         {questionList.slice(count, count + 1).map((item, index) => {
           return (
@@ -218,6 +215,14 @@ const CandidateTestPaperSolution = () => {
           );
         })}
       </div>
+      :
+      <SectionwiseSolution
+        questionList={questionList}
+        sectionList={sectionList}
+        setSectionId={setSectionId}
+        setDetailSolution={setDetailSolution}
+      />
+      }
     </div>
   );
 };
