@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SideBar from "../Sidebar";
 import { toast } from "react-toastify";
-import { postApiReq, postReq } from "../../utils/apiHandlers";
+import { getReq, postApiReq, postReq } from "../../utils/apiHandlers";
 import { useSelector } from "react-redux";
 import { reactIcons } from "../../utils/icons";
 // import { reactIcons } from "../../utils/icons";
@@ -10,6 +10,7 @@ function DashboardTemplate({ active, children }) {
   const [open, setOpen] = useState(false);
   const [openOpt, setOpenOpt] = useState(false);
   const token = useSelector((state) => state.user.userInfo);
+  const [userinfo, setUserInfo] = useState();
 
     const handleLogout = async() => {
          let data = {
@@ -30,7 +31,21 @@ function DashboardTemplate({ active, children }) {
           }
          
       }
-  
+    
+    useEffect(() => {
+        handleGetUserDetails();
+    }, [])
+    const handleGetUserDetails = async() => {
+      try{
+        const response = await getReq(`/user-details/`);
+         if(response.status){
+          setUserInfo(response.data);
+               console.log("---------------user details ", response); 
+         }
+      }catch(err){
+
+      }
+    }
 
 
   return (
@@ -62,7 +77,8 @@ function DashboardTemplate({ active, children }) {
                 <div className="hidden lg:block">
                   <h1 className="text-20 font-bold">Dummy Jhon</h1>
                   <span className="text-16 text-lightgray">
-                    xyz@gmail.com
+                    {/* xyz@gmail.com */}
+                    {userinfo?.email}
                   </span>
                 </div>
                   <span className="text-xl font-bold" >{reactIcons.arrowdown}</span>

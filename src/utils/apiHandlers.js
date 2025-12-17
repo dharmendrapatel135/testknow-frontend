@@ -198,7 +198,7 @@ export const getReq = async(endpoint) => {
     })
     .catch((err) => {
       if (err?.response?.status == 401) {
-        handleGenerateToken();
+        // handleGenerateToken();
       } else {
         // window.location.href='/';
         return handleApiError(err);
@@ -237,7 +237,7 @@ export const getApiReq = async(endpoint) => {
     })
     .catch((err) => {
       if (err?.response?.status == 401) {
-        handleGenerateToken();
+        // handleGenerateToken();
         // window.location.href ='/';
       } else {
         return handleApiError(err);
