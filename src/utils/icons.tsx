@@ -104,6 +104,8 @@ import { SiTestrail } from "react-icons/si";
 import { CgPlayListSearch } from "react-icons/cg";
 import { ImLibrary } from "react-icons/im";
 import { PiListHeartFill } from "react-icons/pi";
+import { MdHistory } from "react-icons/md";
+
 
 
 
@@ -204,5 +206,6 @@ export const reactIcons = {
   package:<PiListHeartFill />,
   tests:<SiTestrail />,
   category:<MdOutlineCategory />,
-  library:<ImLibrary />
+  library:<ImLibrary />,
+  history:<MdHistory />
 };

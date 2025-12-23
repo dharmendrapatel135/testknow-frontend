@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import SideBar from "../Sidebar";
 import { toast } from "react-toastify";
 import { getReq, postApiReq, postReq } from "../../utils/apiHandlers";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { reactIcons } from "../../utils/icons";
+import { userDetails } from "../../features/user/userSlice";
 // import { reactIcons } from "../../utils/icons";
 
 function DashboardTemplate({ active, children }) {

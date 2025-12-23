@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import LoginRegModal from "./components/LoginRegModal";
 import Carousel from "../../components/common/Carousel";
 import Categories from "./components/Categories";
 import Footer from "../../components/common/Footer";
+import { useSelector } from "react-redux";
 
 const slides = [
   { src: "/images/landing/carousel.png", title: "", subtitle: "" },
@@ -13,6 +14,15 @@ const slides = [
 const Landing = () => {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState("Registration");
+  const userDetails = useSelector((state) => state.user.userInfo);
+  const navigate = useNavigate();
+
+
+  // useEffect(() => {
+  //   if(userDetails?.access){
+  //       navigate('/dashboard')
+  //   }
+  // }, [userDetails])
   return (
     <>
     <div className="text-gray-700 w-full">

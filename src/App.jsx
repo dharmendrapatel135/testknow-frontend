@@ -28,6 +28,8 @@ import CandidateTestInstruction from '@CandidateScreen/CandidateTestInstruction'
 import Package from './container/Package';
 import CreatePackage from './container/AdminScreen/CreatePackage';
 import CandidateTestPaperSolution from './container/CandidateScreen/CandidateTestPaperSolution';
+import UserList from './container/AdminScreen/UserList';
+import PackagePurchaseHistory from './container/CandidateScreen/PackagePurchaseHistory';
 
 
 
@@ -43,6 +45,7 @@ function App() {
           {/* <Route path={'/register'} element={<Register />} /> */}
           {/* <Route path={'/forgot_password'} element={<ForgotPassword />} />  */}
           <Route path={'/dashboard'} element={<Dashboard />} />
+          <Route path={'/user-list'} element={<UserList />}  />
           <Route path={'/category-list'} element={<CategoryList />} />
           <Route path={'/category-list/test-list/:categoryId'} element={<TestList />} />
           <Route path={'/category-list/test-list/paper-list/:testId'} element={<PaperList />} />
@@ -56,7 +59,8 @@ function App() {
           <Route path={'/package-details'}  element={<Package />}   />
           <Route path={'/create-package'}  element={<CreatePackage />}   />
           <Route path={'/test-instruction/start-test/:paperId/section'}  element={<CandidateTestStart />}   />
-          <Route  path={`/test-paper-solution/:paperId`}  element={<CandidateTestPaperSolution />}  />
+          <Route path={`/test-paper-solution/:paperId`}  element={<CandidateTestPaperSolution />}  />
+          <Route path={`/purchase-history`}  element={<PackagePurchaseHistory />} />
         </Routes>
       </Router>
        <ToastContainer

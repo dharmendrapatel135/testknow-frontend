@@ -25,6 +25,13 @@ const menuList = [
     icon: reactIcons.library,
   },
   {
+    name: "Users",
+    url: "/user-list",
+    id: "",
+    icon: reactIcons.person,
+  },
+ 
+  {
     name: "Create Package",
     url: "/create-package",
     id: "",
@@ -35,6 +42,12 @@ const menuList = [
     url: "/package-details",
     id: "",
     icon: reactIcons.package,
+  },
+   {
+    name: "Purchase History",
+    url: "/purchase-history",
+    id: "",
+    icon: reactIcons.history,
   },
   // { name: "APPLICANTS", url: "/employers-dashboard/all-applicants", id: "" },
   // { name: "MY ASSIGN JOBS", url: "/employers-dashboard/my-assign-jobs" },
@@ -109,13 +122,13 @@ function MenuList({ active }) {
   const userDetails = useSelector((state) => state.user.userInfo);
 
   const filteredMenuList = menuList.filter((item) => {
-    if (userDetails?.role === "admin" && item.name == "Tests") {
+    if (userDetails?.role === "admin" && item.name == "Tests" && item.name == "Purchase History") {
       return false;
     } else if (
       userDetails?.role === "aspirant" &&
       (item.name == "Category List" ||
         item.name == "Question Library" ||
-        item.name == "Create Package")
+        item.name == "Create Package" || item.name == "Users") 
     ) {
       return false;
     } else {
